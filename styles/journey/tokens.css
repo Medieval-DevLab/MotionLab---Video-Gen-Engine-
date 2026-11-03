@@ -1,0 +1,107 @@
+/* Journey house style v1: the placement maths and design tokens as code (see STYLE.md). */
+@font-face { font-family: "Inter"; src: url("fonts/InterVariable.woff2") format("woff2"); font-weight: 100 900; }
+
+:root {
+  --u: 8px;
+  /* grid: 12 columns of 118 px, 24 px gutters, 120 px side margins; column n starts at 120 + (n-1)*142 */
+  --mx: 120px; --my: 96px; --col: 118px; --gut: 24px; --pitch: 142px;
+  --top: 120px; --mid: 520px; --bottom: 984px;
+
+  /* type scale, ratio 4:3 */
+  --label: 30px;  --label-lh: 40px;
+  --sub: 40px;    --sub-lh: 56px;
+  --head: 72px;   --head-lh: 96px;
+  --state: 96px;  --state-lh: 120px;
+  --display: 168px; --display-lh: 168px;
+
+  /* colour */
+  --paper: #F7F5FA; --ink: #1A1323; --ink-2: #5E5868; --line: #E2DCEA; --surface: #FFFFFF;
+  --path-idle: #D5CCE3;
+  --purple: #A100FF;                 /* Accenture Purple (to confirm with the brand guide) */
+  --deep-a: #5B12A8; --deep-b: #2A0846; --purple-light: #D7A8FF;
+  --risk: #E5484D; --ok: #1E9E6A;
+
+  /* material */
+  --radius: 16px;
+  --shadow: 0 8px 24px rgba(42, 8, 70, .08), 0 1px 2px rgba(42, 8, 70, .06);
+  --glide: cubic-bezier(.22, 1, .36, 1);
+  --travel: cubic-bezier(.65, 0, .35, 1);
+}
+
+* { box-sizing: border-box; margin: 0; }
+html, body { width: 1920px; height: 1080px; overflow: hidden; }
+body { font-family: "Inter", sans-serif; color: var(--ink); background: var(--paper); font-weight: 400;
+       -webkit-font-smoothing: antialiased; font-feature-settings: "ss01" 0, "cv11" 1; }
+.frame { position: relative; width: 1920px; height: 1080px; overflow: hidden; }
+.deep { background: radial-gradient(120% 120% at 30% 20%, var(--deep-a) 0%, var(--deep-b) 70%); color: #fff; }
+
+/* type roles */
+.t-label { font-size: var(--label); line-height: var(--label-lh); font-weight: 500; }
+.t-sub { font-size: var(--sub); line-height: var(--sub-lh); font-weight: 500; color: #4A4453; }   /* owner 2026-11-02: subtext must not look slim */
+.t-head { font-size: var(--head); line-height: var(--head-lh); font-weight: 600; letter-spacing: -0.01em; }
+.t-state { font-size: var(--state); line-height: var(--state-lh); font-weight: 600; letter-spacing: -0.01em; }
+.t-display { font-size: var(--display); line-height: var(--display-lh); font-weight: 600; letter-spacing: -0.02em; }
+.k { color: var(--purple); }               /* the one emphasis method: the spoken keyword */
+.deep .k { color: var(--purple-light); }
+.deep .t-sub { color: rgba(255, 255, 255, .78); }
+
+/* slots: positions come only from the grid */
+.T1 { position: absolute; left: var(--mx); width: calc(6 * var(--col) + 5 * var(--gut)); top: var(--mid); transform: translateY(-50%); }
+.T2 { position: absolute; left: var(--mx); width: calc(8 * var(--col) + 7 * var(--gut)); top: var(--top); }
+.T3 { position: absolute; left: calc(var(--mx) + 2 * var(--pitch)); width: calc(8 * var(--col) + 7 * var(--gut)); top: var(--mid); transform: translateY(-50%); text-align: center; }
+.gap-2u { height: 16px; }
+
+/* material */
+.card { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); }
+.pill { border-radius: 999px; }
+
+/* the ground: one persistent, softly lit world (not a flat colour). Same layers in every scene; the camera moves them
+   by parallax (light 0, lattice 0.5x, arcs 0.8x). The arc is also the shape that grows into the deep-purple chapter. */
+.ground { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.ground .light { position: absolute; inset: 0; background:
+  radial-gradient(60% 70% at 14% 6%, rgba(255, 255, 255, .95) 0%, rgba(255, 255, 255, 0) 62%),
+  radial-gradient(55% 65% at 100% 100%, rgba(161, 0, 255, .075) 0%, rgba(161, 0, 255, 0) 70%); }
+.ground .lattice { position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(94, 88, 104, .18) 1.25px, transparent 1.75px);
+  background-size: 48px 48px; background-position: 24px 24px;
+  -webkit-mask-image: radial-gradient(68% 78% at 74% 64%, #000 0%, rgba(0, 0, 0, .45) 45%, transparent 80%);
+          mask-image: radial-gradient(68% 78% at 74% 64%, #000 0%, rgba(0, 0, 0, .45) 45%, transparent 80%); }
+.ground .arc { position: absolute; left: 1040px; top: 360px; width: 1600px; height: 1600px; border-radius: 50%;
+  background: radial-gradient(circle at 32% 28%, rgba(161, 0, 255, .065) 0%, rgba(161, 0, 255, .025) 45%, rgba(161, 0, 255, 0) 70%);
+  box-shadow: inset 0 0 0 1.5px rgba(161, 0, 255, .10); }
+.ground .arc.inner { left: 1240px; top: 560px; width: 1200px; height: 1200px; background: none; box-shadow: inset 0 0 0 1.5px rgba(161, 0, 255, .07); }
+.deep .ground .light { background:
+  radial-gradient(55% 65% at 22% 12%, rgba(196, 96, 255, .38) 0%, rgba(196, 96, 255, 0) 62%),
+  radial-gradient(50% 60% at 100% 100%, rgba(20, 0, 40, .45) 0%, rgba(20, 0, 40, 0) 70%); }
+.deep .ground .lattice { background-image: radial-gradient(circle, rgba(255, 255, 255, .11) 1.25px, transparent 1.75px); }
+.deep .ground .arc { background: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, .06) 0%, rgba(255, 255, 255, 0) 70%); box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, .10); }
+.deep .ground .arc.inner { background: none; box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, .07); }
+
+/* iconography: glyphs sit in a tinted badge (in cards) or a floating chip (only where the voice names the thing) */
+.badge { width: 56px; height: 56px; border-radius: 14px; background: #F2EAFD; color: var(--purple); display: flex; align-items: center; justify-content: center; flex: none; }
+.badge svg { width: 28px; height: 28px; }
+.chip { position: absolute; border-radius: 50%; background: var(--surface); color: var(--purple); display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 10px 28px rgba(42, 8, 70, .10), 0 1px 3px rgba(42, 8, 70, .08); transform: translate(-50%, -50%); }
+.chip.s { width: 48px; height: 48px; } .chip.s svg { width: 22px; height: 22px; }
+.chip.m { width: 56px; height: 56px; } .chip.m svg { width: 26px; height: 26px; }
+
+/* ground variants for the owner's choice (see BACKGROUNDS.md): v1 light+shape, v2 light+shape+depth, v3 structure */
+.ground .grain { position: absolute; inset: 0; opacity: .05; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .7 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+.deep .ground .grain { mix-blend-mode: screen; opacity: .06; }
+.ground .vignette { position: absolute; inset: 0; background: radial-gradient(120% 95% at 50% 45%, rgba(42, 8, 70, 0) 55%, rgba(42, 8, 70, .07) 100%); }
+.deep .ground .vignette { background: radial-gradient(120% 95% at 50% 45%, rgba(10, 0, 20, 0) 50%, rgba(10, 0, 20, .35) 100%); }
+.depth { position: absolute; inset: 0; pointer-events: none; }
+.depth .far { opacity: .45; filter: blur(1.5px); }
+.depth .near { filter: blur(7px); opacity: .9; }
+.bg-v1 .ground .lattice, .bg-v1 .ground .vignette, .bg-v1 .depth { display: none; }
+.bg-v2 .ground .lattice, .bg-v2 .ground .vignette { display: none; }
+.bg-v3 .ground .arc, .bg-v3 .depth { display: none; }
+.bg-v3 .ground .lattice { -webkit-mask-image: none; mask-image: none; opacity: .8; }
+.deep .chip { background: rgba(255, 255, 255, .10); color: #fff; box-shadow: none; border: 1px solid rgba(255, 255, 255, .16); }
+/* review fixes 1: one arc only; far depth legible (larger, less blur); near DOF elements kept for motion tests only */
+.ground .arc.inner { display: none; }
+.depth .far { opacity: .6; filter: blur(.6px); width: 56px; height: 56px; }
+.depth .far svg { width: 26px; height: 26px; }
+.depth .near { display: none; }
+.bg-v3 .ground .lattice { opacity: 1; background-image: radial-gradient(circle, rgba(94, 88, 104, .30) 1.5px, transparent 2px); }
+.deep.bg-v3 .ground .lattice { background-image: radial-gradient(circle, rgba(255, 255, 255, .16) 1.5px, transparent 2px); }

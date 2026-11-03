@@ -1,0 +1,24 @@
+# dependencies
+node_modules/
+
+# render outputs: every film's out/ folder (frames, picture, mix, final MP4s) is regenerable
+**/out/
+*.mp4
+*.mov
+*.webm
+*.wav
+
+# machine-local state
+library/.cache/
+library/.secrets.json
+.claude/settings.local.json
+
+# reference videos used for taste research (large; not ours)
+reference/
+
+# OS / editor / tooling
+.DS_Store
+Thumbs.db
+desktop.ini
+__pycache__/
+*.pyc

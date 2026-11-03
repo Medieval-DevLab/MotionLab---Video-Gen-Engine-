@@ -1,0 +1,17 @@
+{
+  "name": "videogenengine",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Script + voiceover in, a designed motion film out. Films are authored as code on a fixed process and style system, rendered frame by frame in headless Chrome and encoded with ffmpeg.",
+  "scripts": {
+    "stills": "node engine/render/frames.mjs",
+    "render": "node engine/render/video.mjs",
+    "mix": "node engine/audio/mix.mjs"
+  },
+  "dependencies": {
+    "puppeteer-core": "^25.16.0"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

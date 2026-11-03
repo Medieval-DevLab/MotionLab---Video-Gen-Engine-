@@ -1,0 +1,131 @@
+# Marketo KT: automated audience segmentation. The script used for the 3:30 ElevenLabs take (owner, 2026-11-04),
+# verbatim, one phrase per line, grouped by the voice's speech runs (input to engine/audio/vo-clock.py; no speech
+# model). '+ ' = same run as the line above; '~' = a run that is not speech (a breath). Checked by sound matching:
+# all 8 "Remember:", all 8 "Step" words, and every spoken 586 and 216 land on their lines.
+# Cut from the audio (no screenshot): "In the Qualified People list, we see 216 members." (Step eight) and
+# "216 members." (the closing count).
+# act 1
+## s01
+Hello, and welcome.
+Today we will learn how to automatically segment an audience in Marketo Engage.
+## s02
+By the end,
++ we will know the difference between a Smart List and a Static List,
+how a campaign reuses a shared list,
+and how to check with real numbers that it worked.
+## s03
+We need access to Marketo and some test people.
+No email is sent, so nothing reaches a real inbox.
+# act 2
+## s04
+First,
+the ideas.
+## s05
+A Smart List is a saved question.
+It holds rules,
+not people.
+A Static List is a box.
+People are placed in it and stay there.
+## s06
+Remember:
+a Smart List stores rules.
+A Static List stores people.
+## s07
+A Smart Campaign has four parts.
+Who is the Smart List.
+What is the Flow.
+When is the Schedule.
+And Wow is the Results.
+We will use batch, which runs when we tell it to.
+## s08
+A campaign can reuse an existing Smart List with a filter called Member of Smart List.
+## s09
+Remember:
+change the master list, and every campaign that uses it changes with it.
+# act 3
+## s10
+Now,
+let's build it.
+## s11
+Step one.
+In the Database tab, we open the Group Smart Lists folder and find Database People Audit.
+Its person count is 586.
+Before we reuse a shared list,
+we check the Used By tab to see what already depends on it.
+## s12
+Remember:
+open Used By before you edit or delete a shared list.
+## s13
+Step two.
+Its one rule is Person was Created,
+on or before August 2031.
+Every person was created before that date,
+so everyone matches.
+586 is our baseline.
+## s14
+Remember:
+every later number needs a filter that explains it.
+## s15
+Step three.
+In Marketing Activities,
++ we right-click the folder,
+choose New Smart Campaign,
+and name it KT Campaign.
+It starts with zero members,
++ no rules,
++ and no Flow steps.
+This is our before state.
+## s16
+Step four.
+In the Smart List tab,
++ we add Member of Smart List and pick Database People Audit.
+Then we add a second filter:
+SFDC Type is Contact.
+Use ALL filters means a person must pass both.
+## s17
+Remember:
+Use ALL filters means AND.
+~
+## s18
+Step five.
+In the Flow tab,
++ we add one step:
+Add to List,
+pointing at KT Programme dot Qualified People.
+## s19
+Remember:
+create the Static List first.
+The Flow can only select a list that already exists.
+## s20
+Step six.
+On the Schedule tab,
++ the mode is Batch,
+and the campaign is set to affect around 216 people.
+That number is an estimate,
+and each person runs through the flow once.
+## s21
+Remember:
+an empty or incomplete filter blocks the run.
+Fix every empty value first.
+## s22
+Step seven.
+We click Run Once,
+then Run.
+## s23
+Step eight.
+In Results,
++ there is one Add to List row per person.
+216 items,
+matching the estimate.
+# act 4
+## s24
+586 people in the database.
+216 passed both filters.
+216 rows.
+Every number is accounted for.
+## s25
+Remember:
+if a count differs,
+find the filter or the step that explains it.
+## s26
+Thank you for watching.

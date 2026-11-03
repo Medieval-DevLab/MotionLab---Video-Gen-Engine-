@@ -1,0 +1,44 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Marketo KT · automated audience segmentation</title>
+<link rel="stylesheet" href="../../styles/journey/tokens.css">
+<link rel="stylesheet" href="../../engine/kit/kit.css">
+<link rel="stylesheet" href="../../engine/kit/treatments.css">
+<style>
+  @font-face { font-family: 'Plus Jakarta Sans'; src: url('../../library/fonts/plus-jakarta-sans/plus-jakarta-sans-latin-wght-normal.woff2') format('woff2'); font-weight: 200 800; }
+  .pj { font-family: 'Plus Jakarta Sans', Inter, sans-serif; }
+  #world { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; }
+  .shotframe { position: absolute; border-radius: 18px; overflow: hidden; background: #fff; box-shadow: 0 2px 6px rgba(42, 8, 70, .10), 0 30px 80px rgba(42, 8, 70, .18); }
+  .shots { position: absolute; left: 0; top: 0; width: 1918px; height: 831px; transform-origin: 0 0; }
+  .shots img { position: absolute; left: 0; top: 0; width: 1918px; display: block; }
+  /* highlight: a crisp outline hugging the element, a soft glow, a light spotlight (one at a time) */
+  .hl { position: absolute; border-radius: 8px; border: 3px solid #A100FF; box-shadow: 0 0 14px rgba(161, 0, 255, .45), 0 0 0 9999px rgba(26, 19, 35, .10); pointer-events: none; }
+  /* the cursor glows purple; a click blooms a soft purple light (no outline) */
+  .scr-cursor { filter: drop-shadow(0 0 7px rgba(161, 0, 255, .85)) drop-shadow(0 3px 6px rgba(0, 0, 0, .25)) !important; }
+  #world .ring { position: absolute; border: 0 !important; border-radius: 50%; transform: translate(-50%, -50%); background: radial-gradient(circle, rgba(161, 0, 255, .6) 0%, rgba(161, 0, 255, .22) 45%, rgba(161, 0, 255, 0) 72%); pointer-events: none; }
+  .hdr { position: absolute; left: 40px; top: 30px; display: flex; align-items: center; gap: 16px; background: rgba(255, 255, 255, .96); border-radius: 16px; padding: 8px 22px 8px 8px; box-shadow: 0 10px 30px rgba(42, 8, 70, .14); }
+  .hdr .no { background: #A100FF; color: #fff; font-weight: 700; font-size: 22px; letter-spacing: .06em; border-radius: 10px; padding: 7px 12px; }
+  .hdr .no b { font-weight: 600; opacity: .78; }
+  .hdr .dots { display: flex; gap: 6px; } .hdr .dots i { width: 9px; height: 9px; border-radius: 50%; background: #E2DCEA; } .hdr .dots i.on { background: #A100FF; }
+  .hdr .tt { font-size: 30px; font-weight: 600; color: #1A1323; }
+  .cap { position: absolute; left: 160px; right: 160px; bottom: 40px; text-align: center; }
+  .cap span { display: inline-block; max-width: 1600px; background: rgba(26, 19, 35, .74); color: #fff; font-size: 30px; line-height: 42px; font-weight: 500; border-radius: 14px; padding: 8px 22px; }
+  .lcard { position: absolute; width: 700px; background: linear-gradient(135deg, #A100FF 0%, #7400D4 100%); color: #fff; border-radius: 26px; padding: 24px 32px 30px; box-shadow: 0 24px 60px rgba(74, 0, 120, .35), 0 0 0 1px rgba(255, 255, 255, .18) inset; }
+  .lcard .bd { display: inline-flex; align-items: center; gap: 10px; background: #fff; color: #A100FF; font-size: 32px; font-weight: 700; border-radius: 999px; padding: 4px 18px 4px 12px; }
+  .lcard .tx { margin-top: 18px; font-size: 38px; line-height: 50px; font-weight: 600; }
+  .tile { position: absolute; background: #fff; border-radius: 24px; box-shadow: 0 12px 36px rgba(42, 8, 70, .12); }
+  .oc-art { height: 210px; display: flex; align-items: center; justify-content: center; } .oc-t { font-size: 34px; line-height: 42px; font-weight: 600; padding: 0 28px; text-align: center; color: #1A1323; }
+  .fancard { position: absolute; width: 560px; height: 242px; border-radius: 16px; background-size: cover; background-position: left top; border: 4px solid #fff; box-shadow: 0 24px 60px rgba(42, 8, 70, .22); }
+  .titlecard { position: absolute; background: #fff; border-radius: 28px; box-shadow: 0 30px 80px rgba(42, 8, 70, .18); }
+  .avatar { position: absolute; width: 64px; height: 64px; border-radius: 50%; background: #A100FF; color: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(74, 0, 120, .3); }
+  .big { font-size: 200px; line-height: 1; font-weight: 700; color: #1A1323; letter-spacing: -.03em; }
+</style></head>
+<body><div class="frame" id="frame"></div>
+<script src="../../engine/kit/icons.js"></script>
+<script src="../../engine/runtime/film.js"></script>
+<script src="../../engine/kit/kit.js"></script>
+<script src="../../engine/kit/text.js"></script>
+<script src="../../engine/kit/ground.js"></script>
+<script src="../../engine/kit/screen.js"></script>
+<script src="timing.js"></script>
+<script src="film.js"></script>
+</body></html>

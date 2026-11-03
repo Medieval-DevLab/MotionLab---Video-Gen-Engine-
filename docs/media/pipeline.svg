@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 380" width="1600" height="380" font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#8A8394"/></marker>
+    <marker id="ap" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#A100FF"/></marker>
+    <filter id="s" x="-10%" y="-10%" width="120%" height="140%"><feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#2A0846" flood-opacity=".10"/></filter>
+  </defs>
+  <rect width="1600" height="380" rx="20" fill="#F7F5FA"/>
+  <text x="40" y="354" font-size="17" font-weight="600" fill="#5E5868">SCRIPT + VOICEOVER IN</text>
+  <text x="1560" y="354" font-size="17" font-weight="600" fill="#A100FF" text-anchor="end">FINISHED FILM OUT</text>
+
+  <!-- nodes: x = 40 + i*192, w 172 -->
+  <g font-size="15" fill="#5E5868">
+    <g transform="translate(40 80)"><rect width="172" height="150" rx="14" fill="#fff" filter="url(#s)"/><circle cx="26" cy="28" r="14" fill="#F2EAFD"/><text x="26" y="33" text-anchor="middle" font-size="14" font-weight="700" fill="#A100FF">1</text>
+      <text x="16" y="72" font-size="20" font-weight="700" fill="#1A1323">Intake</text><text x="16" y="98">Script, voiceover,</text><text x="16" y="118">facts ledger</text></g>
+    <g transform="translate(232 80)"><rect width="172" height="150" rx="14" fill="#fff" filter="url(#s)"/><circle cx="26" cy="28" r="14" fill="#F2EAFD"/><text x="26" y="33" text-anchor="middle" font-size="14" font-weight="700" fill="#A100FF">2</text>
+      <text x="16" y="72" font-size="20" font-weight="700" fill="#1A1323">Clock</text><text x="16" y="98">Voice aligned by its</text><text x="16" y="118">pauses, no speech</text><text x="16" y="138">model</text></g>
+    <g transform="translate(424 80)"><rect width="172" height="150" rx="14" fill="#fff" filter="url(#s)"/><circle cx="26" cy="28" r="14" fill="#F2EAFD"/><text x="26" y="33" text-anchor="middle" font-size="14" font-weight="700" fill="#A100FF">3</text>
+      <text x="16" y="72" font-size="20" font-weight="700" fill="#1A1323">Film system</text><text x="16" y="98">A fresh look per film,</text><text x="16" y="118">a tuning-scale</text><text x="16" y="138">preset</text></g>
+    <g transform="translate(616 80)"><rect width="172" height="150" rx="14" fill="#A100FF" filter="url(#s)"/><circle cx="26" cy="28" r="14" fill="#fff" fill-opacity=".22"/><text x="26" y="33" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">4</text>
+      <text x="16" y="72" font-size="20" font-weight="700" fill="#fff">Storyboard</text><text x="16" y="98" fill="#fff" fill-opacity=".85">Every segment, with</text><text x="16" y="118" fill="#fff" fill-opacity=".85">tuning options</text></g>
+    <g transform="translate(808 80)"><rect width="172" height="150" rx="14" fill="#fff" filter="url(#s)"/><circle cx="26" cy="28" r="14" fill="#F2EAFD"/><text x="26" y="33" text-anchor="middle" font-size="14" font-weight="700" fill="#A100FF">5</text>
+      <text x="16" y="72" font-size="20" font-weight="700" fill="#1A1323">Build</text><text x="16" y="98">The film as code on</text><text x="16" y="118">the kit, a function</text><text x="16" y="138">of time</text></g>
+    <g transform="translate(1000 80)"><rect width="172" height="150" rx="14" fill="#fff" filter="url(#s)"/><circle cx="26" cy="28" r="14" fill="#F2EAFD"/><text x="26" y="33" text-anchor="middle" font-size="14" font-weight="700" fill="#A100FF">6</text>
+      <text x="16" y="72" font-size="20" font-weight="700" fill="#1A1323">Checks</text><text x="16" y="98">Contact sheets,</text><text x="16" y="118">seams, overlaps,</text><text x="16" y="138">clipping</text></g>
+    <g transform="translate(1192 80)"><rect width="172" height="150" rx="14" fill="#fff" filter="url(#s)"/><circle cx="26" cy="28" r="14" fill="#F2EAFD"/><text x="26" y="33" text-anchor="middle" font-size="14" font-weight="700" fill="#A100FF">7</text>
+      <text x="16" y="72" font-size="20" font-weight="700" fill="#1A1323">Render + mix</text><text x="16" y="98">Headless Chrome to</text><text x="16" y="118">ffmpeg; mixed to</text><text x="16" y="138">−14 LUFS</text></g>
+    <g transform="translate(1384 80)"><rect width="172" height="150" rx="14" fill="#A100FF" filter="url(#s)"/><circle cx="26" cy="28" r="14" fill="#fff" fill-opacity=".22"/><text x="26" y="33" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">8</text>
+      <text x="16" y="72" font-size="20" font-weight="700" fill="#fff">Notes</text><text x="16" y="98" fill="#fff" fill-opacity=".85">Per segment; only</text><text x="16" y="118" fill="#fff" fill-opacity=".85">those segments</text><text x="16" y="138" fill="#fff" fill-opacity=".85">change</text></g>
+  </g>
+
+  <!-- arrows between nodes -->
+  <g stroke="#8A8394" stroke-width="2.5" fill="none" marker-end="url(#a)">
+    <path d="M214 155 L228 155"/><path d="M406 155 L420 155"/><path d="M598 155 L612 155"/><path d="M790 155 L804 155"/>
+    <path d="M982 155 L996 155"/><path d="M1174 155 L1188 155"/><path d="M1366 155 L1380 155"/>
+  </g>
+  <!-- the revision loop: notes back to build -->
+  <path d="M1470 234 C 1470 300, 1330 326, 1182 326 C 1034 326, 894 300, 894 240" stroke="#A100FF" stroke-width="2.5" fill="none" stroke-dasharray="7 6" marker-end="url(#ap)"/>
+  <text x="1182" y="354" font-size="15" font-weight="600" fill="#A100FF" text-anchor="middle">revise only the noted segments, re-check, re-render</text>
+
+  <!-- owner gates -->
+  <g font-size="13" font-weight="700" fill="#A100FF">
+    <rect x="644" y="38" width="116" height="26" rx="13" fill="#F2EAFD"/><text x="702" y="56" text-anchor="middle">OWNER GATE</text>
+    <rect x="1412" y="38" width="116" height="26" rx="13" fill="#F2EAFD"/><text x="1470" y="56" text-anchor="middle">OWNER GATE</text>
+  </g>
+</svg>

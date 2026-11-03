@@ -1,0 +1,88 @@
+// The tuning scale (styles/SCALE.md): eight dials around a Base (0), and presets by theme. Shared by the scale page,
+// its previews and the storyboard's film-wide card. Steps run -2..+2. The Base is calibrated on the first film's
+// measured settings, but nothing a viewer sees is named after a film.
+(function () {
+  const dials = [
+    { id: 'energy', name: 'Energy', q: 'How lively each movement is', minus: 'calmer', plus: 'more dynamic',
+      about: 'How things move when they arrive: how fast, how far, whether they overshoot and settle, and whether anything drifts while it waits. It does not change when things happen; the voiceover decides that.',
+      steps: ['Entrances 1.0 s, no rise', 'Entrances 0.8 s, small rise', '0.6 s glide, 24 px rise', '0.45 s with overshoot; idle drift', '0.35 s, pops, word by word'],
+      say: ['Everything fades in slowly, without moving. Still and calm: for sensitive or serious subjects.',
+        'Gentle entrances with a small lift. Unhurried, like a considered explainer.',
+        'Smooth glides with a short rise and no overshoot. Measured and premium.',
+        'Quicker entrances that overshoot slightly and settle. Cards drift gently while they wait, and the headline wipes in. Brisk and confident.',
+        'Snappy entrances that travel further and pop, with the headline arriving word by word. High energy for launches, still with one thing moving at a time.'] },
+    { id: 'pace', name: 'Pace', q: 'How often something new arrives', minus: 'slower', plus: 'faster',
+      about: 'How many beats land in a scene, and how soon the scene swaps to the next idea. The voiceover sets the limit: a scene is never shorter than its words.',
+      steps: ['One scene, two beats', 'One scene, four beats', 'One scene, six beats', 'Two scenes, eight beats', 'Three scenes, eleven beats'],
+      say: ['The headline, then everything else at once. Lots of time to look at each scene.',
+        'Things arrive in pairs. Relaxed, with room to read.',
+        'Each idea arrives as it is spoken: the headline, four inputs one by one, then the result.',
+        'The headline splits into two beats, and the scene swaps to the next idea sooner.',
+        'Quick beats and two swaps, so the film covers more ground per minute.'] },
+    { id: 'camera', name: 'Camera', q: 'How the view moves', minus: 'stiller', plus: 'more travel',
+      about: 'How the view moves through the world: locked, pushing in slowly, travelling between groups, or zooming right through an object.',
+      steps: ['Locked frame', 'One slow push', 'Slow push, then a short pan', 'Push in to 1.5×, then back out', 'Zoom through to 3×, pull out wide'],
+      say: ['The frame never moves; only the content does.',
+        'One slow push-in across the whole scene. You barely notice it, but it adds depth.',
+        'A slow push, then a short pan that follows the line to the next idea. The background moves a little slower than the foreground.',
+        'Pushes in on the moment that matters, then pulls back out and travels on.',
+        'Zooms through the hub, then pulls out wide to reveal a bigger world. Cinematic: keep it for big reveals.'] },
+    { id: 'density', name: 'Density', q: 'How much is in the frame at its fullest', minus: 'more air', plus: 'richer',
+      about: 'How much is on screen at the fullest moment of a scene. Fewer elements give more air; more elements show a richer system. Still only one thing moves at a time.',
+      steps: ['Headline and hub only', 'Headline, hub, two inputs', 'Headline, four inputs, hub', 'Adds statuses and a subline', 'Adds a chart and a photo inset'],
+      say: ['One idea on screen: the headline and the hub. Maximum air.',
+        'The headline, the hub and two inputs.',
+        'The headline, four inputs and the hub, joined by lines.',
+        'A status on each input and a supporting line under the headline.',
+        'A small chart and a photo inset too: a layered, information-rich frame.'] },
+    { id: 'ground', name: 'Background', q: 'How alive the ground is', minus: 'quieter', plus: 'more alive',
+      about: 'How alive the ground behind everything is, and how much it changes when the story turns. It is never flat or frozen.',
+      steps: ['A near-still tone', 'Soft light and an arc', 'Light, arc and a depth field', 'Living ground that changes', 'Moving shader ground'],
+      say: ['A near-still tone; only the light drifts slowly.',
+        'Soft light and one large arc.',
+        'Light, the arc and a faint field of icons in the distance that moves with the camera.',
+        'Drifting colour washes and a dot texture that change to rings, with a sweep of light, when the story turns.',
+        'A moving gradient that becomes an aurora when the story turns. The richest ground: for openings and launches.'] },
+    { id: 'type', name: 'Type', q: 'How much the words carry', minus: 'fewer words', plus: 'more type',
+      about: 'How much the on-screen words carry the film, from a keyword only to type as the main visual. The words are always the script\'s own.',
+      steps: ['A keyword only', 'One short headline', 'A headline per scene', 'Larger kinetic headline + subline', 'Type is the visual'],
+      say: ['No headline. A short keyword appears at the hub, and the visuals tell the story.',
+        'One short headline.',
+        'One headline per scene, at the standard size.',
+        'A larger headline that arrives word by word, with a supporting line.',
+        'Display-size words fill the frame line by line, and the visual steps back.'] },
+    { id: 'real', name: 'Realism', q: 'Drawn or real', minus: 'more drawn', plus: 'more real',
+      about: 'How much of what you see is real (photos, footage, product screens) and how much is drawn in code.',
+      steps: ['Everything drawn', 'A drawn person', 'One real photo', 'More photos', 'A real scene behind'],
+      say: ['Everything is drawn; the result is a card, not a person.',
+        'A drawn person (an avatar) at the human moment.',
+        'One real photo at the human moment.',
+        'A larger photo, and small photos on the inputs.',
+        'A real place fills the background and a real person is the result. In a walkthrough, your screenshots play this part.'] },
+    { id: 'sound', name: 'Sound', q: 'How much you hear', minus: 'sparser', plus: 'richer',
+      about: 'How much you hear besides the voice: how many moves make a sound, and how present the music is. Every film is mixed to the same loudness.',
+      steps: ['Music-led, 2 sounds', 'Softer, 3 sounds', 'A click per input', 'A sound on most moves', 'Risers, hits, a bigger track'],
+      say: ['Music leads, with two sounds in the whole scene.',
+        'Softer, with three sounds on the key moments.',
+        'A soft click as each input arrives, under the music.',
+        'A sound on most moves, including the gather and the approval.',
+        'Risers, hits and a whoosh on the camera move, over a more energetic track.'] },
+  ];
+  const P = (energy, pace, camera, density, ground, type, real, sound) => ({ energy, pace, camera, density, ground, type, real, sound });
+  const presets = [
+    { id: 'base', name: 'Base', for: 'Measured and premium: a product solving a business problem', v: P(0, 0, 0, 0, 0, 0, 0, 0) },
+    { id: 'showreel', name: 'Showreel', for: 'Capabilities: a team, a studio or a platform showing what it can do', v: P(1, 1, 1, 1, 1, 1, 2, 1) },
+    { id: 'launch', name: 'Launch', for: 'A new product, an event opener, an announcement', v: P(2, 2, 1, 1, 2, 1, 0, 2) },
+    { id: 'explainer', name: 'Explainer', for: 'How something works: concepts and systems, calmly', v: P(-1, -1, 0, 0, 0, 0, -1, -1) },
+    { id: 'executive', name: 'Executive', for: 'Results, strategy and numbers for leadership', v: P(-1, -1, -1, 0, -1, 1, 0, -1) },
+    { id: 'human', name: 'Human story', for: "People and culture, or a customer's story", v: P(0, 0, 1, -1, 0, -1, 2, 0) },
+    { id: 'walkthrough', name: 'Walkthrough', for: 'Product walkthroughs and training from screenshots', v: P(-1, -1, 1, -1, -2, 1, 2, -2) },
+  ];
+  const sign = (v) => (v > 0 ? '+' + v : v < 0 ? '−' + -v : '0');
+  const label = (v) => (v === 0 ? 'Base' : sign(v));
+  const vec = (v) => dials.map((d) => v[d.id]).join(',');   // the preview's #v= hash
+  // the line that goes into "Copy my choices"
+  const text = (preset, v) => `Scale vs Base (preset: ${(presets.find((p) => p.id === preset) || { name: 'custom' }).name}): ` +
+    dials.map((d) => `${d.name} ${sign(v[d.id])}`).join(', ');
+  window.VGEScaleDials = { dials, presets, sign, label, vec, text };
+})();

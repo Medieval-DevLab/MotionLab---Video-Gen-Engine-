@@ -1,0 +1,42 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Tuning scale · previews</title>
+<link rel="stylesheet" href="../journey/tokens.css">
+<link rel="stylesheet" href="../../engine/kit/kit.css">
+<link rel="stylesheet" href="../../engine/kit/treatments.css">
+<style>
+  /* #<dial>: one dial's five steps in a row (embedded by index.html). No hash: all eight dials on one 1920x1080 sheet. */
+  html, body { background: transparent; }
+  body.row { width: 1920px; height: 211px; }
+  #root { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; }
+  .cellbox { position: absolute; overflow: hidden; border-radius: 10px; box-shadow: 0 0 0 1px rgba(42, 8, 70, .10); background: #F7F4EF; cursor: default; }
+  .cellbox .frame { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+  .sheet { background: #F4F2F7; }
+  .stage { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; }
+  .rl { position: absolute; left: 60px; width: 500px; }
+  .rl b { display: block; font-family: 'Plus Jakarta Sans', Inter, sans-serif; font-size: 30px; line-height: 36px; font-weight: 600; color: var(--ink); }
+  .rl small { font-size: 20px; color: #5E5868; font-weight: 500; }
+  .hd { position: absolute; top: 8px; font-size: 22px; font-weight: 600; color: #5E5868; text-align: center; }
+  .hd.zero { color: var(--purple); }
+  .lane { position: absolute; left: 120px; top: 1004px; width: 1680px; height: 10px; border-radius: 5px; background: rgba(94, 88, 104, .14); }
+  .tick { position: absolute; top: -13px; width: 36px; height: 36px; margin-left: -18px; border-radius: 50%; background: var(--purple); }
+  .head-p { position: absolute; top: -8px; width: 26px; height: 26px; margin-left: -13px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 4px var(--purple); }
+  .lvl { position: absolute; left: 120px; top: 930px; display: flex; gap: 10px; align-items: flex-end; height: 52px; }
+  .lvl .b { width: 16px; border-radius: 4px; background: rgba(161, 0, 255, .22); }
+  .lvl .b.on { background: var(--purple); }
+  .lvl span { margin-left: 14px; font-size: 30px; font-weight: 600; color: #5E5868; align-self: center; }
+  .listening .lvl span { color: var(--purple); }
+</style></head>
+<body><div id="root"></div>
+<script src="../../engine/kit/icons.js"></script>
+<script src="../../engine/runtime/film.js"></script>
+<script src="../../engine/kit/kit.js"></script>
+<script src="../../engine/kit/text.js"></script>
+<script src="../../engine/kit/ground.js"></script>
+<script src="../../engine/kit/shader.js"></script>
+<script src="../../engine/kit/sketch.js"></script>
+<script src="../../engine/kit/data.js"></script>
+<script src="../../engine/kit/screen.js"></script>
+<script src="dials.js"></script>
+<script src="presets.js"></script>
+<script src="strip.js"></script>
+</body></html>

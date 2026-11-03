@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tuning scale · VideoGenEngine</title>
+<style>
+  @font-face { font-family: 'Inter'; src: url('../journey/fonts/InterVariable.woff2') format('woff2'); font-weight: 100 900; }
+  @font-face { font-family: 'Plus Jakarta Sans'; src: url('../../library/fonts/plus-jakarta-sans/plus-jakarta-sans-latin-wght-normal.woff2') format('woff2'); font-weight: 200 800; }
+  :root { --ink: #1A1323; --ink2: #5E5868; --line: #E6E0EC; --p: #A100FF; --pp: #F2EAFD; --bg: #F4F2F7; --foot: 64px; }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body { margin: 0; font-family: Inter, sans-serif; color: var(--ink); background: var(--bg); font-size: 15px; line-height: 1.45; }
+  button, textarea { font: inherit; color: inherit; }
+  h1 { font-family: 'Plus Jakarta Sans'; font-size: 30px; margin: 0; letter-spacing: -.01em; }
+  h3 { font-family: 'Plus Jakarta Sans'; font-size: 21px; margin: 0; }
+  .muted { color: var(--ink2); }
+  .card { background: #fff; border-radius: 14px; box-shadow: 0 1px 2px rgba(42,8,70,.06), 0 6px 20px rgba(42,8,70,.05); }
+  iframe { display: block; border: 0; background: #F7F4EF; aspect-ratio: 16 / 9; }
+
+  /* ---- view 1: presets (may scroll) */
+  #v-presets { max-width: 1680px; margin: 0 auto; padding: 26px 32px calc(var(--foot) + 28px); }
+  .intro { margin-top: 4px; max-width: 1200px; }
+  .pgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 18px; }
+  .pc { overflow: hidden; cursor: pointer; border: 2px solid transparent; transition: border-color .15s; display: flex; flex-direction: column; }
+  .pc:hover { border-color: #DCC6F6; } .pc.on { border-color: var(--p); }
+  .pc iframe { width: 100%; pointer-events: none; }
+  .pc .pb { padding: 11px 14px 13px; display: flex; flex-direction: column; flex: 1; }
+  .pc .pn { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 16px; }
+  .pc .pn .sel { display: none; font-size: 11.5px; font-weight: 700; color: #fff; background: var(--p); border-radius: 999px; padding: 1px 8px; }
+  .pc.on .pn .sel { display: inline-block; }
+  .pc .pf { font-size: 13.5px; color: var(--ink2); margin-top: 2px; }
+  .pc .pv { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+  .pc .pv span { font-size: 11.5px; border-radius: 6px; padding: 1px 6px; background: #F4F1F8; color: var(--ink2); white-space: nowrap; }
+  .pv span.up { background: var(--pp); color: var(--p); font-weight: 600; } .pv span.dn { background: #EAF2FB; color: #2D6CB5; font-weight: 600; }
+  .custom .art { aspect-ratio: 16 / 9; background: repeating-linear-gradient(135deg, #FBF9FD 0 18px, #F5F0FA 18px 36px); display: flex; align-items: center; justify-content: center; color: var(--p); font-family: 'Plus Jakarta Sans'; font-weight: 700; font-size: 22px; }
+  .custom textarea { margin-top: 8px; width: 100%; min-height: 64px; resize: vertical; border: 1.5px solid var(--line); border-radius: 10px; padding: 8px 10px; font-size: 13.5px; }
+  .decide { margin-top: 18px; padding: 14px 20px; display: none; align-items: center; gap: 14px; flex-wrap: wrap; position: sticky; bottom: calc(var(--foot) + 10px); z-index: 4; box-shadow: 0 8px 30px rgba(42,8,70,.16); border: 1.5px solid #E4D4F7; }
+  .decide.show { display: flex; }
+  .decide .what { flex: 1; min-width: 320px; }
+  .decide .what b { font-size: 17px; }
+  .btn { border: 0; border-radius: 10px; padding: 10px 18px; cursor: pointer; font-weight: 600; }
+  .btn.primary { background: var(--p); color: #fff; } .btn.ghost { background: #EFEAF4; }
+  .btn.done { background: #1E9E6A; color: #fff; }
+
+  /* ---- view 2: customise (always fits the window, no scrolling) */
+  #v-tune { position: fixed; left: 0; right: 0; top: 0; bottom: var(--foot); display: none; flex-direction: column; padding: 14px 24px 12px; gap: 10px; }
+  body.tuning #v-tune { display: flex; } body.tuning #v-presets { display: none; } body.tuning { overflow: hidden; }
+  .tbar { display: flex; align-items: center; gap: 14px; }
+  .tbar .t { font-family: 'Plus Jakarta Sans'; font-weight: 700; font-size: 20px; }
+  .tune { flex: 1; min-height: 0; display: grid; grid-template-columns: 230px 1fr; gap: 14px; }
+  .menu { padding: 6px; overflow: auto; }
+  .mi { display: flex; align-items: center; width: 100%; text-align: left; border: 0; background: none; border-radius: 10px; padding: 7px 10px; cursor: pointer; gap: 8px; }
+  .mi:hover { background: #F6F2FA; } .mi.on { background: var(--pp); }
+  .mi .mn { flex: 1; } .mi .mn b { display: block; font-size: 14.5px; } .mi .mn small { color: var(--ink2); font-size: 12px; line-height: 1.25; display: block; }
+  .mi .mv { font-weight: 700; font-size: 12.5px; border-radius: 6px; padding: 1px 7px; background: #F0ECF4; color: var(--ink2); }
+  .mi .mv.up { background: var(--p); color: #fff; } .mi .mv.dn { background: #2D6CB5; color: #fff; }
+  .panel { min-height: 0; display: flex; flex-direction: column; padding: 14px 18px 12px; gap: 8px; }
+  .about { margin: 0; color: var(--ink2); font-size: 14px; }
+  .seg { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+  .sb { border: 1.5px solid var(--line); background: #fff; border-radius: 11px; padding: 6px 10px; cursor: pointer; text-align: left; }
+  .sb:hover { border-color: #CDB3EE; }
+  .sb .n { font-family: 'Plus Jakarta Sans'; font-weight: 700; font-size: 17px; }
+  .sb .c { font-size: 12.5px; color: var(--ink2); line-height: 1.3; }
+  .sb.on { border-color: var(--p); background: var(--p); color: #fff; } .sb.on .c { color: rgba(255,255,255,.88); }
+  .say { padding: 8px 14px; background: #FAF7FD; border-left: 3px solid var(--p); border-radius: 0 10px 10px 0; font-size: 15px; }
+  .row { display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--ink2); flex-wrap: wrap; }
+  .tg { border: 1.5px solid var(--line); background: #fff; border-radius: 999px; padding: 3px 11px; cursor: pointer; font-size: 13px; }
+  .tg.on { background: var(--ink); border-color: var(--ink); color: #fff; }
+  .sm { border: 0; background: #EFEAF4; border-radius: 9px; padding: 5px 11px; cursor: pointer; font-weight: 600; font-size: 13px; }
+  .players { flex: 1; min-height: 0; container-type: size; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .pl { margin: 0; min-height: 0; display: flex; flex-direction: column; align-items: center; }
+  .pl figcaption { width: min(100%, calc((100cqh - 26px) * 16 / 9)); display: flex; justify-content: space-between; font-weight: 700; font-size: 14px; height: 22px; margin-bottom: 4px; }
+  .pl figcaption small { font-weight: 500; color: var(--ink2); }
+  .pl iframe { width: min(100%, calc((100cqh - 26px) * 16 / 9)); border-radius: 10px; box-shadow: 0 0 0 1px rgba(42,8,70,.08); }
+
+  /* ---- footer */
+  .foot { position: fixed; left: 0; right: 0; bottom: 0; height: var(--foot); background: rgba(255,255,255,.97); border-top: 1px solid var(--line); padding: 0 24px; display: flex; gap: 14px; align-items: center; z-index: 5; }
+  #setting { font-size: 13.5px; color: var(--ink2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
+</style>
+</head>
+<body>
+<!-- view 1: choose a preset -->
+<div id="v-presets">
+  <h1>Tuning scale</h1>
+  <div class="muted intro">How a film feels, set with eight dials around a <b>Base</b>. Pick the preset that fits your film's theme. Each card plays
+    an example made for that theme. Use its recommended setting, or customise the dials. The dials change amounts, never the rules: every
+    film stays readable, follows the script and has one thing moving at a time. Rules and numbers: <a href="../SCALE.md">styles/SCALE.md</a></div>
+  <div class="pgrid" id="presets"></div>
+  <div class="card decide" id="decide">
+    <div class="what" id="what"></div>
+    <button class="btn primary" id="use">✓ Use the recommended setting</button>
+    <button class="btn ghost" id="custom-go">Customise the dials ›</button>
+  </div>
+</div>
+
+<!-- view 2: customise (opens only on request) -->
+<div id="v-tune">
+  <div class="tbar"><button class="btn ghost" id="back">‹ Back to presets</button><span class="t" id="tt"></span><span class="muted" style="font-size:13.5px">The players use one neutral demo scene, so you see only what each dial does.</span>
+    <span style="flex:1"></span><button class="btn ghost" id="restore">Restore the recommended setting</button></div>
+  <div class="tune">
+    <nav class="card menu" id="menu"></nav>
+    <div class="card panel">
+      <h3 id="dn"></h3>
+      <p class="about" id="about"></p>
+      <div class="seg" id="seg"></div>
+      <div class="say" id="say"></div>
+      <div class="row">Right player:
+        <button class="tg" data-m="all">Your whole setting</button><button class="tg" data-m="one">Base + this dial only</button>
+        <span style="flex:1"></span>
+        <button class="sm" id="replay">↻ Replay both</button><button class="sm" id="la">▶ Listen: Base</button><button class="sm" id="lb">▶ Listen: yours</button></div>
+      <div class="players">
+        <figure class="pl"><figcaption>Base <small>every dial at 0</small></figcaption><iframe id="pa" title="Base"></iframe></figure>
+        <figure class="pl"><figcaption><span id="pbl">Your setting</span><small id="pbs"></small></figcaption><iframe id="pb" title="Your setting"></iframe></figure>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="foot">
+  <button class="btn primary" id="copy">Copy my choice</button>
+  <span id="setting"></span>
+</div>
+
+<script src="dials.js"></script>
+<script>
+(function () {
+  const { dials, presets, sign, label, vec, text } = window.VGEScaleDials, KEY = 'vge-scale-v3';
+  const BASE = presets[0].v, $ = (id) => document.getElementById(id);
+  const st = Object.assign({ preset: 'base', v: { ...BASE }, note: '', dial: 'energy', mode: 'all', view: 'presets', chosen: false }, JSON.parse(localStorage.getItem(KEY) || '{}'));
+  const el = (h) => { const d = document.createElement('div'); d.innerHTML = h.trim(); return d.firstChild; };
+  const cls = (v) => (v > 0 ? 'up' : v < 0 ? 'dn' : '');
+  const pname = (id) => (presets.find((p) => p.id === id) || { name: 'Custom' }).name;
+  const isRec = () => { const p = presets.find((x) => x.id === st.preset); return !!p && dials.every((d) => p.v[d.id] === st.v[d.id]); };
+
+  // ---- view 1: the preset cards (each plays its own example) and the Custom card
+  const PG = $('presets');
+  presets.forEach((p) => {
+    const c = el(`<div class="card pc" data-p="${p.id}"><iframe src="strip.html#preset=${p.id}" loading="lazy" title="${p.name} example"></iframe>
+      <div class="pb"><div class="pn">${p.name}<span class="sel">Selected</span></div><div class="pf">${p.for}</div>
+      <div class="pv">${dials.map((d) => `<span class="${cls(p.v[d.id])}">${d.name} ${sign(p.v[d.id])}</span>`).join('')}</div></div></div>`);
+    c.onclick = () => { st.preset = p.id; st.v = { ...p.v }; st.chosen = false; paint(); };
+    PG.appendChild(c);
+  });
+  const cc = el(`<div class="card pc custom" data-p="custom"><div class="art">Your own</div><div class="pb"><div class="pn">Custom<span class="sel">Selected</span></div>
+    <div class="pf">Describe what you want: the feel, a reference film, what to avoid. Then set the dials yourself.</div>
+    <textarea id="note" placeholder="e.g. calm and cinematic, like a nature documentary; very few words; no fast cuts"></textarea></div></div>`);
+  cc.onclick = (e) => { if (e.target.tagName === 'TEXTAREA') return; st.preset = 'custom'; st.chosen = false; paint(); };
+  PG.appendChild(cc);
+  const note = $('note'); note.value = st.note || '';
+  note.oninput = () => { st.note = note.value; if (st.preset !== 'custom') { st.preset = 'custom'; st.chosen = false; } paint(); };
+  note.onclick = () => { if (st.preset !== 'custom') { st.preset = 'custom'; st.chosen = false; paint(); } };
+  $('use').onclick = () => { st.chosen = true; paint(); };
+  $('custom-go').onclick = () => { st.view = 'tune'; paint(true); };
+  $('back').onclick = () => { st.view = 'presets'; paint(); };
+  $('restore').onclick = () => { const p = presets.find((x) => x.id === st.preset); if (p) { st.v = { ...p.v }; paint(true); } };
+
+  // ---- view 2: customise
+  const M = $('menu');
+  dials.forEach((d) => { const b = el(`<button class="mi" data-d="${d.id}"><span class="mn"><b>${d.name}</b><small>${d.q}</small></span><span class="mv"></span></button>`); b.onclick = () => { st.dial = d.id; paint(true); }; M.appendChild(b); });
+  const SEG = $('seg');
+  [-2, -1, 0, 1, 2].forEach((v) => { const b = el(`<button class="sb" data-v="${v}"><div class="n">${label(v)}</div><div class="c"></div></button>`); b.onclick = () => { st.v[st.dial] = v; st.chosen = false; paint(true); }; SEG.appendChild(b); });
+  document.querySelectorAll('.tg').forEach((b) => { b.onclick = () => { st.mode = b.dataset.m; paint(true); }; });
+
+  const pa = $('pa'), pb = $('pb'); let waiting = 0;
+  const restart = () => [pa, pb].forEach((f) => f.contentWindow && f.contentWindow.postMessage({ restart: true }, '*'));
+  [pa, pb].forEach((f) => { f.onload = () => { if (--waiting <= 0) restart(); }; });
+  function players() {
+    const d = dials.find((x) => x.id === st.dial), lane = d.id === 'sound' ? '&lane=1' : '';
+    const right = st.mode === 'one' ? { ...BASE, [d.id]: st.v[d.id] } : st.v;
+    const a = `strip.html#v=${vec(BASE)}${lane}`, b = `strip.html#v=${vec(right)}${lane}`;
+    waiting = 0;
+    if (!pa.src.endsWith(a)) { waiting++; pa.src = a; }
+    if (!pb.src.endsWith(b)) { waiting++; pb.src = b; }
+    if (!waiting) restart();
+    $('pbl').textContent = st.mode === 'one' ? `Base + ${d.name} ${label(st.v[d.id])}` : 'Your setting';
+    $('pbs').textContent = st.mode === 'one' ? 'only this dial changed' : (isRec() ? `${pname(st.preset)} (recommended)` : `from ${pname(st.preset)}`);
+  }
+
+  const line = () => {
+    const base = st.preset === 'custom' ? `Scale vs Base (custom): ` + dials.map((d) => `${d.name} ${sign(st.v[d.id])}`).join(', ') : text(st.preset, st.v) + (isRec() ? ' (recommended)' : ' (customised)');
+    return base + (st.preset === 'custom' && st.note.trim() ? ` · What I want: "${st.note.trim()}"` : '');
+  };
+  function paint(reload) {
+    document.body.classList.toggle('tuning', st.view === 'tune');
+    PG.querySelectorAll('.pc').forEach((c) => c.classList.toggle('on', c.dataset.p === st.preset));
+    const dec = $('decide'); dec.classList.add('show');
+    $('what').innerHTML = st.preset === 'custom' ? `<b>Custom</b><div class="muted">Describe what you want in the card, then set the dials.</div>`
+      : `<b>${pname(st.preset)}</b> ${isRec() ? '' : '<span class="muted">(dials customised)</span>'}<div class="muted">${presets.find((p) => p.id === st.preset).for}</div>`;
+    $('use').style.display = st.preset === 'custom' ? 'none' : '';
+    $('use').className = 'btn ' + (st.chosen && isRec() ? 'done' : 'primary'); $('use').textContent = st.chosen && isRec() ? '✓ Recommended setting chosen' : '✓ Use the recommended setting';
+    $('custom-go').textContent = st.preset === 'custom' ? 'Set the dials ›' : 'Customise the dials ›';
+    // customise view
+    $('tt').textContent = st.preset === 'custom' ? 'Customising: your own setting' : `Customising: ${pname(st.preset)}`;
+    $('restore').style.display = st.preset === 'custom' ? 'none' : '';
+    const d = dials.find((x) => x.id === st.dial), v = st.v[d.id];
+    M.querySelectorAll('.mi').forEach((b) => { const x = st.v[b.dataset.d]; b.classList.toggle('on', b.dataset.d === st.dial); const m = b.querySelector('.mv'); m.textContent = label(x); m.className = 'mv ' + cls(x); });
+    $('dn').textContent = `${d.name}: ${d.q.toLowerCase()}`; $('about').textContent = d.about;
+    SEG.querySelectorAll('.sb').forEach((b, i) => { b.classList.toggle('on', +b.dataset.v === v); b.querySelector('.c').textContent = d.steps[i]; });
+    $('say').innerHTML = `<b>${d.name} ${label(v)}:</b> ${d.say[v + 2]}`;
+    document.querySelectorAll('.tg').forEach((b) => b.classList.toggle('on', b.dataset.m === st.mode));
+    $('setting').textContent = line();
+    localStorage.setItem(KEY, JSON.stringify(st));
+    if (reload && st.view === 'tune') players();
+  }
+  $('replay').onclick = restart;
+  $('la').onclick = () => pa.contentWindow.postMessage({ listen: 1 }, '*');
+  $('lb').onclick = () => pb.contentWindow.postMessage({ listen: 1 }, '*');
+  $('copy').onclick = async () => { const b = $('copy'); try { await navigator.clipboard.writeText(line()); b.textContent = 'Copied ✓ paste it in the chat'; } catch (e) { b.textContent = 'Select the line and copy it'; } setTimeout(() => { b.textContent = 'Copy my choice'; }, 2500); };
+  paint(true);
+})();
+</script>
+</body>
+</html>

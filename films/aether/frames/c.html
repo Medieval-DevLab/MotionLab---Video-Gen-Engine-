@@ -1,0 +1,69 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../../../styles/journey/tokens.css">
+<!-- Style frame C: "Aether connects live shipment tracking, ERP systems, warehouse inventories, and carrier networks
+     into one intelligent ecosystem." Hub build: four inputs (cols 1-4) gather into the core (centred on col 9).
+     Floating chips = the data each source sends (named by the VO), travelling into the core. Depth (v2) = that data
+     drifting at a distance around the ecosystem. -->
+<style>
+  .scene { position: absolute; inset: 0; }
+  .in { position: absolute; left: 120px; width: 544px; height: 96px; display: flex; align-items: center; gap: 20px; padding-left: 20px; }
+  .core { position: absolute; left: 1195px; top: 504px; width: 240px; height: 240px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: var(--sub); line-height: var(--sub-lh); font-weight: 600; letter-spacing: -0.01em;
+          background: radial-gradient(circle at 35% 30%, #B83BFF 0%, #A100FF 55%, #8A00DB 100%); box-shadow: 0 16px 48px rgba(161, 0, 255, .25), 0 2px 6px rgba(42, 8, 70, .12); }
+  .ico { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .chip.l { width: 128px; height: 128px; } .chip.l svg { width: 56px; height: 56px; }
+</style></head>
+<body><div class="frame">
+  <svg width="0" height="0" style="position:absolute"><defs>
+    <symbol id="i-truck" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></symbol>
+    <symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></symbol>
+    <symbol id="i-warehouse" viewBox="0 0 24 24"><path d="M18 21V10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v11"/><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 1.132-1.803l7.95-3.974a2 2 0 0 1 1.837 0l7.948 3.974A2 2 0 0 1 22 8z"/><path d="M6 13h12"/><path d="M6 17h12"/></symbol>
+    <symbol id="i-network" viewBox="0 0 24 24"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
+    <symbol id="i-boxes" viewBox="0 0 24 24"><path d="M2.97 12.92A2 2 0 0 0 2 14.63v3.24a2 2 0 0 0 .97 1.71l3 1.8a2 2 0 0 0 2.06 0L12 19v-5.5l-5-3-4.03 2.42Z"/><path d="m7 16.5-4.74-2.85"/><path d="m7 16.5 5-3"/><path d="M7 16.5v5.17"/><path d="M12 13.5V19l3.97 2.38a2 2 0 0 0 2.06 0l3-1.8a2 2 0 0 0 .97-1.71v-3.24a2 2 0 0 0-.97-1.71L17 10.5l-5 3Z"/><path d="m17 16.5-5-3"/><path d="m17 16.5 4.74-2.85"/><path d="M17 16.5v5.17"/><path d="M7.97 4.42A2 2 0 0 0 7 6.13v4.37l5 3 5-3V6.13a2 2 0 0 0-.97-1.71l-3-1.8a2 2 0 0 0-2.06 0l-3 1.8Z"/><path d="M12 8 7.26 5.15"/><path d="m12 8 4.74-2.85"/><path d="M12 13.5V8"/></symbol>
+    <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></symbol>
+    <symbol id="i-package" viewBox="0 0 24 24"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/></symbol>
+  </defs></svg>
+
+  <div class="ground"><i class="light"></i><i class="lattice"></i><i class="arc"></i><i class="arc inner"></i><i class="vignette"></i><i class="grain"></i></div>
+
+  <!-- depth, far: the ecosystem's data drifting at a distance (v2 only) -->
+  <div class="depth">
+    <div class="chip s far" style="left:1590px; top:360px;"><svg class="ico"><use href="#i-package"/></svg></div>
+    
+    <div class="chip s far" style="left:1704px; top:808px;"><svg class="ico"><use href="#i-boxes"/></svg></div>
+    
+    
+  </div>
+
+  <div class="T2"><div class="t-head">One <span class="k">intelligent</span> ecosystem</div></div>
+
+  <svg class="scene" width="1920" height="1080" viewBox="0 0 1920 1080">
+    <circle cx="1315" cy="624" r="184" fill="none" stroke="#E2DCEA" stroke-width="2"/>
+    <g fill="none" stroke="#D5CCE3" stroke-width="2">
+      <path d="M 664 432 C 900 432, 1000 553, 1218 553"/>
+      <path d="M 664 560 C 900 560, 1000 599, 1198 599"/>
+      <path d="M 664 688 C 900 688, 1000 649, 1198 649"/>
+      <path d="M 664 816 C 900 816, 1000 695, 1218 695"/>
+    </g>
+    <path d="M 1435 624 L 1920 624" stroke="#A100FF" stroke-width="4" stroke-linecap="round"/>
+  </svg>
+
+  <div class="in card t-label" style="top:384px;"><div class="badge"><svg class="ico"><use href="#i-truck"/></svg></div>Live shipment tracking</div>
+  <div class="in card t-label" style="top:512px;"><div class="badge"><svg class="ico"><use href="#i-database"/></svg></div>ERP systems</div>
+  <div class="in card t-label" style="top:640px;"><div class="badge"><svg class="ico"><use href="#i-warehouse"/></svg></div>Warehouse inventories</div>
+  <div class="in card t-label" style="top:768px;"><div class="badge"><svg class="ico"><use href="#i-network"/></svg></div>Carrier networks</div>
+
+  <!-- the data in transit along each connector, into the core -->
+  <div class="chip m" style="left:1007px; top:514px;"><svg class="ico"><use href="#i-pin"/></svg></div>
+  <div class="chip s" style="left:936px; top:578px;"><svg class="ico"><use href="#i-file"/></svg></div>
+  <div class="chip m" style="left:983px; top:664px;"><svg class="ico"><use href="#i-boxes"/></svg></div>
+  <div class="chip s" style="left:923px; top:765px;"><svg class="ico"><use href="#i-route"/></svg></div>
+
+  <div class="core">Aether</div>
+
+  <!-- depth, near: one out-of-focus element in the foreground corner (v2 only) -->
+  <div class="depth"><div class="chip l near" style="left:1856px; top:1012px;"><svg class="ico"><use href="#i-package"/></svg></div></div>
+</div>
+<script>document.querySelector(".frame").classList.add("bg-" + (new URLSearchParams(location.search).get("bg") || "v2"));</script>
+</body></html>

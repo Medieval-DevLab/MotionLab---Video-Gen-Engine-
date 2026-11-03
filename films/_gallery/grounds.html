@@ -1,0 +1,40 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Grounds gallery</title>
+<link rel="stylesheet" href="../../styles/journey/tokens.css">
+<link rel="stylesheet" href="../../styles/studio/studio.css">
+<link rel="stylesheet" href="../../engine/kit/kit.css">
+<style>
+  .tag { position: absolute; left: 120px; bottom: 96px; display: flex; flex-direction: column; gap: 4px; z-index: 50; }
+  .tag b { font-family: 'Plus Jakarta Sans'; font-size: 56px; line-height: 64px; font-weight: 600; color: var(--ink); letter-spacing: -.01em; }
+  .tag small { font-size: 26px; font-weight: 500; color: #5E5868; }
+  .tag.light b { color: #fff; } .tag.light small { color: rgba(255, 255, 255, .78); }
+</style></head>
+<body><div class="frame" id="frame"></div>
+<script src="../../engine/kit/icons.js"></script>
+<script src="../../engine/runtime/film.js"></script>
+<script src="../../engine/kit/kit.js"></script>
+<script src="../../engine/kit/shader.js"></script>
+<script>
+// Eight shader grounds, 4 s each, cross-fading. Each is one VGEShader.layer call with four colours.
+(function () {
+  const V = VGE, K = VGEKit, F = document.getElementById('frame'); window.DUR = 32;
+  const G = [
+    ['mesh', 'Mesh gradient', 'in the spirit of ShaderGradient · Paper Shaders', ['#F4EEFB', '#E3CCFA', '#FCE2C6', '#D8E3FF'], { i: 1, s: 1, v: .7 }],
+    ['aurora', 'Aurora', 'in the spirit of React Bits Aurora', ['#F6F3FA', '#D9BDF8', '#C3EBE0', '#FCDCC0'], { i: .6, s: 1, v: 1 }],
+    ['silk', 'Silk', 'in the spirit of React Bits Silk', ['#EFE7FA', '#D2B6F6', '#FFFFFF', '#FFFFFF'], { i: 1, s: 1.1, v: 1 }],
+    ['topo', 'Contour lines', 'in the spirit of Vanta topology', ['#F7F5FA', '#A100FF', '#E2D2F7', '#FFFFFF'], { i: .8, s: 1, v: 1 }],
+    ['grain', 'Grain gradient', 'in the spirit of Paper Shaders grain gradient', ['#F6EFFB', '#E2C6FA', '#FBD8BE', '#FFFFFF'], { i: 1, s: 1, v: 1, x: 1 }],
+    ['rays', 'Light rays', 'in the spirit of Magic UI light rays', ['#ECE3F8', '#FFFFFF', '#FFF1DC', '#FFFFFF'], { i: 1, s: 1, v: 1 }],
+    ['halftone', 'Halftone field', 'in the spirit of Paper Shaders dithering', ['#F7F4EF', '#D5BEF4', '#FFFFFF', '#FFFFFF'], { i: 1, s: 1, v: 1 }],
+    ['mesh', 'Deep mesh (chapters)', 'the same mesh, in the chapter palette', ['#2A0846', '#5B12A8', '#A100FF', '#1B0533'], { i: 1, s: 1.2, v: .8 }],
+  ];
+  G.forEach(([fx, name, sub, colors, P], i) => {
+    const a = i * 4, keys = [{ t: 0, a: 0, ...P }, { t: a - .6, a: 1, d: .6, e: V.glide }, { t: a + 4, a: 0, d: .6, e: V.glide }];
+    if (i === 0) keys[1] = { t: 0, a: 1, cut: true };
+    VGEShader.layer(F, { effect: fx, colors, keys, src: [.5, .2], z: i });
+    const tg = K.div(F, 'tag' + (i === 7 ? ' light' : ''), '', `<b>${name}</b><small>${sub}</small>`); V.vis(tg, { tin: a + .2, tout: a + 3.6, rise: 14 });
+  });
+  V.ready();
+})();
+</script>
+</body></html>

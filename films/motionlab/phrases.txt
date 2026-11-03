@@ -1,0 +1,129 @@
+# MotionLab script, one spoken phrase per line (split where the voice pauses). Input to engine/audio/vo-clock.py.
+# act 1
+## s01
+At Accenture,
+thousands of reinventors are constantly building what's next.
+## s02
+New solutions. New capabilities.
+New ways of solving problems.
+## s03
+But here's the challenge...
+Not every innovation gets the attention it deserves.
+## s04
+Some get buried in overflowing inboxes.
+## s05
+Others get lost in presentations and lengthy demonstrations.
+## s06
+And while videos can bring these stories to life...
+creating them takes time,
+effort, and specialized skills.
+# act 2
+## s07
+But...
+what if AI could change that?
+## s08
+What if we could create videos for...
+well,
+anything?
+## s09
+Product showcases.
+Software demos.
+Client communications.
+Training videos.
+Or something entirely new.
+## s10
+Any format.
+Any style.
+## s11
+Just provide a reference...
+and let AI do the rest.
+# act 3
+## s12
+Introducing...
+MotionLab.
+## s13
+An AI-powered video creation engine, built on Claude Opus.
+## s14
+From animated workflows and product simulations...
+to motion graphics and synchronized voiceovers,
+## s15
+MotionLab handles the entire production process.
+## s16
+All it needs is your story,
+a voiceover,
+or a creative reference.
+## s17
+Sounds interesting?
+Well...
+don't take our word for it.
+Let's put it to the test.
+## s18
+Here's a simple product story we gave MotionLab.
+# act 4
+## s19
+Imagine managing a global supply chain.
+Thousands of shipments.
+Hundreds of suppliers.
+Millions of moving parts.
+## s20
+Now imagine...
+a critical shipment gets delayed in Singapore,
+putting three manufacturing facilities at risk.
+## s21
+Meet Aether.
+An AI-powered supply chain intelligence platform.
+## s22
+Aether connects your enterprise systems, warehouses, logistics networks, and forecasts...
+into one intelligent command center.
+## s23
+When disruptions strike,
+Aether instantly analyzes inventory,
+identifies production risks,
+and simulates alternative routes.
+## s24
+Its AI engine recommends the best recovery strategy...
+balancing costs, capacity, and delivery commitments.
+## s25
+A planner approves the recommendation.
+## s26
+But wait...
+the carrier rejects the booking.
+No problem.
+## s27
+Aether automatically finds an alternative,
+reroutes the shipment,
+and synchronizes updates across connected systems.
+## s28
+Meanwhile,
+real-time dashboards track costs,
+deliveries, and operational risks.
+## s29
+From disruption...
+to resolution.
+## s30
+Aether.
+Turning complexity into intelligent action.
+# act 5
+## s31
+And...
+there you have it.
+A simple story, transformed into a complete product showcase.
+## s32
+Animated workflows.
+Enterprise interfaces.
+Intelligent visual storytelling.
+## s33
+And that's just one possibility.
+Product demos.
+Client communications.
+Explainers.
+Or something entirely different.
+## s34
+You bring the idea.
+MotionLab brings it to life.
+## s35
+Because every innovation deserves to be seen.
+## s36
+MotionLab.
+Your imagination...
+in motion.

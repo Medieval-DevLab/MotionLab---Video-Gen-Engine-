@@ -1,0 +1,32 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>MotionLab</title>
+<link rel="stylesheet" href="../../styles/journey/tokens.css">
+<link rel="stylesheet" href="../../styles/studio/studio.css">
+<link rel="stylesheet" href="../../engine/kit/kit.css">
+<style>
+  .chapter { position: absolute; inset: 0; }
+  .a4 { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; transform-origin: 0 0; background: var(--paper); }
+  canvas.net { position: absolute; left: 0; top: 0; }
+</style></head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#2A0846" flood-opacity=".10"/></filter>
+  <radialGradient id="gSpark"><stop offset="0" stop-color="#A100FF" stop-opacity=".45"/><stop offset="1" stop-color="#A100FF" stop-opacity="0"/></radialGradient>
+  <radialGradient id="gSpot"><stop offset="0" stop-color="#F5A524" stop-opacity=".55"/><stop offset=".6" stop-color="#F5A524" stop-opacity=".18"/><stop offset="1" stop-color="#F5A524" stop-opacity="0"/></radialGradient>
+  <radialGradient id="gDeep" cx="30%" cy="20%" r="120%"><stop offset="0" stop-color="#5B12A8"/><stop offset=".7" stop-color="#2A0846"/></radialGradient>
+  <linearGradient id="gPhoto" x1="0" y1="0" x2="0" y2="1"><stop offset=".55" stop-color="#2A0846" stop-opacity="0"/><stop offset="1" stop-color="#2A0846" stop-opacity=".2"/></linearGradient>
+</defs></svg>
+<div class="frame bg-v2" id="frame"></div>
+<script src="../../engine/kit/icons.js"></script>
+<script src="../../engine/runtime/film.js"></script>
+<script src="../../engine/kit/kit.js"></script>
+<script src="../../engine/kit/ground.js"></script>
+<script src="../../engine/kit/text.js"></script>
+<script src="storyboard/draw.js"></script>
+<script src="timing.js"></script>
+<script src="film.js"></script>
+<script src="ml-a.js"></script>
+<script src="aether.js"></script>
+<script src="ml-b.js"></script>
+<script>ML.ready();</script>
+</body></html>

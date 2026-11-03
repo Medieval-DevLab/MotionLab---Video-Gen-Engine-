@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>MotionLab · storyboard v1</title>
+<style>
+  @font-face { font-family: 'Inter'; src: url('../../../styles/journey/fonts/InterVariable.woff2') format('woff2'); font-weight: 100 900; }
+  @font-face { font-family: 'Plus Jakarta Sans'; src: url('../../../library/fonts/plus-jakarta-sans/plus-jakarta-sans-latin-wght-normal.woff2') format('woff2'); font-weight: 200 800; }
+  :root { --ink: #1A1323; --ink2: #5E5868; --line: #E6E0EC; --p: #A100FF; --pp: #F2EAFD; --ann: #0B8FD8; --bg: #F4F2F7; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Inter, sans-serif; color: var(--ink); background: var(--bg); font-size: 15px; line-height: 1.5; }
+  .wrap { max-width: 1320px; margin: 0 auto; padding: 32px 32px 160px; }
+  h1 { font-family: 'Plus Jakarta Sans'; font-size: 34px; margin: 0 0 4px; letter-spacing: -.01em; }
+  h2 { font-family: 'Plus Jakarta Sans'; font-size: 24px; margin: 48px 0 6px; }
+  h3 { margin: 0; font-size: 18px; }
+  .muted { color: var(--ink2); }
+  .card { background: #fff; border-radius: 14px; box-shadow: 0 1px 2px rgba(42,8,70,.06), 0 6px 20px rgba(42,8,70,.05); padding: 20px 22px; }
+  .intro { display: grid; grid-template-columns: 1.3fr 1fr; gap: 20px; margin-top: 18px; }
+  .intro ul { margin: 8px 0 0; padding-left: 18px; } .intro li { margin: 3px 0; }
+  .legend span { display: inline-block; margin-right: 14px; }
+  .k { color: var(--p); font-weight: 600; } .a { color: var(--ann); font-weight: 600; }
+  .bar { position: relative; height: 44px; margin: 22px 0 6px; border-radius: 10px; overflow: hidden; display: flex; }
+  .bar a { display: block; height: 100%; border-right: 1px solid rgba(255,255,255,.7); text-decoration: none; }
+  .bar a:hover { filter: brightness(1.12); }
+  .acts { display: flex; font-size: 12px; color: var(--ink2); }
+  .acts div { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; padding-right: 6px; }
+  .globals { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+  .q { font-weight: 600; margin-bottom: 8px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { border: 1.5px solid var(--line); background: #fff; border-radius: 999px; padding: 5px 12px; font: inherit; font-size: 13.5px; cursor: pointer; color: var(--ink); }
+  .chip:hover { border-color: #CDB3EE; }
+  .chip.on { background: var(--p); border-color: var(--p); color: #fff; }
+  .chip .rec { font-size: 11px; opacity: .8; margin-left: 4px; }
+  .desc { font-size: 13.5px; color: var(--ink2); margin-top: 8px; min-height: 20px; }
+  .seg { margin-top: 18px; }
+  .seg-h { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .id { font-weight: 700; color: #fff; background: var(--ink); border-radius: 6px; padding: 1px 8px; font-size: 13px; }
+  .time { font-variant-numeric: tabular-nums; color: var(--ink2); font-size: 13.5px; }
+  .script { margin: 10px 0 0; padding: 10px 14px; background: #FAF8FC; border-left: 3px solid var(--p); border-radius: 0 8px 8px 0; font-size: 14.5px; }
+  .script .t { font-variant-numeric: tabular-nums; color: var(--ink2); font-size: 12px; margin-right: 6px; }
+  .script span.l { margin-right: 10px; }
+  .flag { margin-top: 8px; font-size: 13px; color: #8A4B00; background: #FFF4E0; border-radius: 6px; padding: 4px 10px; display: inline-block; }
+  .panels { display: grid; gap: 12px; margin-top: 14px; }
+  .panels.n2 { grid-template-columns: 1fr 1fr; } .panels.n3 { grid-template-columns: 1fr 1fr 1fr; }
+  .panel svg { width: 100%; display: block; border-radius: 10px; box-shadow: 0 0 0 1px rgba(42,8,70,.08); }
+  .panel .cap { font-size: 12.5px; color: var(--ink2); margin-top: 4px; font-variant-numeric: tabular-nums; }
+  .plan { display: grid; grid-template-columns: 110px 1fr; gap: 4px 14px; margin-top: 14px; font-size: 14px; }
+  .plan b { color: var(--ink2); font-weight: 600; font-size: 13px; padding-top: 1px; }
+  .tune { margin-top: 16px; border-top: 1px solid var(--line); padding-top: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 22px; }
+  .tune .grp .lab { font-size: 12.5px; font-weight: 600; color: var(--ink2); margin-bottom: 4px; text-transform: uppercase; letter-spacing: .04em; }
+  textarea { width: 100%; font: inherit; font-size: 14px; border: 1.5px solid var(--line); border-radius: 10px; padding: 8px 10px; resize: vertical; min-height: 40px; }
+  .note-grp { grid-column: 1 / -1; }
+  .foot { position: fixed; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,.96); backdrop-filter: blur(6px); border-top: 1px solid var(--line); padding: 12px 32px; display: flex; gap: 14px; align-items: center; z-index: 5; }
+  .foot button { font: inherit; font-weight: 600; border: 0; border-radius: 10px; padding: 10px 18px; cursor: pointer; }
+  .go { background: var(--p); color: #fff; } .ghost { background: #EFEAF4; color: var(--ink); }
+  #out { display: none; position: fixed; left: 32px; right: 32px; bottom: 76px; height: 46vh; z-index: 6; box-shadow: 0 10px 40px rgba(42,8,70,.25); font-family: ui-monospace, Consolas, monospace; font-size: 13px; }
+  .act-h { display: flex; align-items: baseline; gap: 14px; }
+  .act-h .look { font-size: 13px; color: var(--ink2); background: #fff; border-radius: 999px; padding: 2px 10px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#2A0846" flood-opacity=".10"/></filter>
+    <radialGradient id="gSpark"><stop offset="0" stop-color="#A100FF" stop-opacity=".45"/><stop offset="1" stop-color="#A100FF" stop-opacity="0"/></radialGradient>
+    <radialGradient id="gSpot"><stop offset="0" stop-color="#F5A524" stop-opacity=".55"/><stop offset=".6" stop-color="#F5A524" stop-opacity=".18"/><stop offset="1" stop-color="#F5A524" stop-opacity="0"/></radialGradient>
+    <radialGradient id="gDeep" cx="30%" cy="20%" r="120%"><stop offset="0" stop-color="#5B12A8"/><stop offset=".7" stop-color="#2A0846"/></radialGradient>
+    <radialGradient id="gLightS" cx="78%" cy="0%" r="90%"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".95"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></radialGradient>
+    <radialGradient id="gLightJ" cx="20%" cy="0%" r="90%"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".9"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></radialGradient>
+    <radialGradient id="gArcS"><stop offset=".6" stop-color="#F1E6D8" stop-opacity="0"/><stop offset="1" stop-color="#EFE3D3" stop-opacity=".9"/></radialGradient>
+    <radialGradient id="gArcJ"><stop offset=".6" stop-color="#EDE3F8" stop-opacity="0"/><stop offset="1" stop-color="#E9DDF7" stop-opacity=".9"/></radialGradient>
+    <linearGradient id="gPhoto" x1="0" y1="0" x2="0" y2="1"><stop offset=".55" stop-color="#2A0846" stop-opacity="0"/><stop offset="1" stop-color="#2A0846" stop-opacity=".2"/></linearGradient>
+    <marker id="ah" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#0B8FD8"/></marker>
+  </defs>
+</svg>
+
+<div class="wrap">
+  <h1>MotionLab · storyboard v1</h1>
+  <div class="muted">Your script and voiceover · 36 segments in 5 acts · film length 3:06.5 (voice 3:03.6 + a 3 s end hold) · 16:9, 30 fps</div>
+
+  <div class="intro">
+    <div class="card">
+      <h3>How to use this</h3>
+      <ul>
+        <li>Every segment shows its <b>script lines with the voiceover times</b>, then panels from <b>Start → Peak</b> (some have a Build panel in between). Every scene opens sparse and builds, per your note on the Aether port.</li>
+        <li>Below the panels: the text flow, what the visual does, the one primary mover, the move into the next segment, and the sound.</li>
+        <li><b>Tune</b> any segment with the chips: energy, element count, layout, and sometimes a whole alternative concept. Anything you don't touch stays <b>as planned</b>. Add a note anywhere.</li>
+        <li>When you're done, press <b>Copy my choices</b> and paste the text into our chat. Your choices are saved in this browser if you close the page.</li>
+      </ul>
+    </div>
+    <div class="card legend">
+      <h3>Reading the panels</h3>
+      <ul>
+        <li>Panels are wireframes at the real 1920×1080 grid and type sizes. The look is final in spirit, not in finish: real style frames come after you approve the plan.</li>
+        <li><span class="a">Blue dashed arrows and numbers</span> show motion and order. They are annotations, not part of the film.</li>
+        <li><span class="k">Purple words</span> are the spoken keywords. All on-screen text is the script's own words; any trim is flagged in <span style="background:#FFF4E0;color:#8A4B00;padding:0 6px;border-radius:4px">orange</span>.</li>
+        <li>The Aether part (act 4) uses the journey look you approved, because it is the film MotionLab made. The rest uses a new MotionLab look (see Film-wide choices).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="bar" id="bar"></div>
+  <div class="acts" id="acts"></div>
+
+  <h2>Film-wide choices</h2>
+  <div class="muted">The recommended option is preselected. Change anything here and it applies to the whole film.</div>
+  <div id="scale" style="margin-top:14px"></div>
+  <div class="globals" id="globals"></div>
+
+  <div id="segs"></div>
+</div>
+
+<textarea id="out" readonly></textarea>
+<div class="foot">
+  <button class="go" id="copy">Copy my choices</button>
+  <button class="ghost" id="show">Show text</button>
+  <span class="muted" id="count"></span>
+  <span style="flex:1"></span>
+  <button class="ghost" id="reset">Reset all</button>
+</div>
+
+<script src="../../../engine/kit/icons.js"></script>
+<script src="../timing.js"></script>
+<script src="draw.js"></script>
+<script src="segments.js"></script>
+<script src="../../../styles/scale/dials.js"></script>
+<script src="../../../styles/scale/card.js"></script>
+<script>
+(function () {
+  const { SEGS, ACTS, GLOBALS } = window.SB, T = window.TIMING;
+  const KEY = 'motionlab-storyboard-v1';
+  const st = JSON.parse(localStorage.getItem(KEY) || '{"g":{},"s":{}}');
+  const save = () => { localStorage.setItem(KEY, JSON.stringify(st)); count(); };
+  const tm = Object.fromEntries(T.segments.map((s) => [s.id, s]));
+  const fmt = (t) => { const m = Math.floor(t / 60), s = (t - m * 60); return `${m}:${s.toFixed(1).padStart(4, '0')}`; };
+  const actCol = { 1: '#C9A6F2', 2: '#B47DEB', 3: '#A100FF', 4: '#7FC8B0', 5: '#8A52D6' };
+  const el = (h) => { const d = document.createElement('div'); d.innerHTML = h.trim(); return d.firstChild; };
+
+  // timeline bar
+  const bar = document.getElementById('bar'), acts = document.getElementById('acts');
+  T.segments.forEach((s) => { const a = document.createElement('a'); a.href = '#' + s.id; a.title = `${s.id} · ${fmt(s.t0)}–${fmt(s.t1)} · ${s.lines.map((l) => l.text).join(' ')}`; a.style.width = ((s.t1 - s.t0) / T.dur * 100) + '%'; a.style.background = actCol[s.act]; bar.appendChild(a); });
+  ACTS.forEach((A) => { const ss = T.segments.filter((s) => s.act === A.n); const w = (ss[ss.length - 1].t1 - ss[0].t0) / T.dur * 100; acts.appendChild(el(`<div style="width:${w}%">${A.n}. ${A.name} · ${fmt(ss[0].t0)}</div>`)); });
+
+  // globals
+  const G = document.getElementById('globals');
+  GLOBALS.forEach((g) => {
+    if (!st.g[g.id]) st.g[g.id] = g.opts.find((o) => o[2])[0];
+    const c = el(`<div class="card"><div class="q">${g.q}</div><div class="chips"></div><div class="desc"></div>${g.note ? `<div class="desc" style="font-style:italic">${g.note}</div>` : ''}</div>`);
+    const chips = c.querySelector('.chips'), desc = c.querySelector('.desc');
+    const paint = () => { chips.querySelectorAll('.chip').forEach((b) => b.classList.toggle('on', b.dataset.k === st.g[g.id])); const o = g.opts.find((x) => x[0] === st.g[g.id]); desc.textContent = o ? o[3] : ''; };
+    g.opts.forEach(([k, label, rec]) => { const b = el(`<button class="chip" data-k="${k}">${label}${rec ? '<span class="rec">recommended</span>' : ''}</button>`); b.onclick = () => { st.g[g.id] = k; paint(); save(); }; chips.appendChild(b); });
+    paint(); G.appendChild(c);
+  });
+
+  // the tuning scale (styles/SCALE.md): film-wide dials vs Aether; the segment boards below are unchanged
+  const SC = VGEScaleCard.mount(document.getElementById('scale'), { key: KEY + '-scale', preset: 'showreel', link: '../../../styles/scale/index.html' });
+
+  // segments
+  const groups = (o) => [
+    ['energy', 'Energy', [['calm', 'Calmer', o.calm], ['plan', 'As planned'], ['dyn', 'More dynamic', o.dyn]]],
+    ['elements', 'Elements', [['fewer', 'Fewer', o.fewer], ['plan', 'As planned'], ['more', 'More', o.more]]],
+    ['layout', 'Layout', [['plan', 'As drawn'], ['alt', 'Alternative', o.layout]]],
+    ['concept', 'Concept', [['plan', 'As planned'], ['alt', 'Alternative', o.concept]]],
+  ].map(([id, lab, ch]) => [id, lab, ch.filter((c) => c[0] === 'plan' || c[2])]).filter(([, , ch]) => ch.length > 1);
+
+  const box = document.getElementById('segs'); let lastAct = 0;
+  SEGS.forEach((S) => {
+    const t = tm[S.id];
+    if (t.act !== lastAct) { lastAct = t.act; const A = ACTS[t.act - 1]; const ss = T.segments.filter((s) => s.act === A.n); box.appendChild(el(`<div><h2 class="act-h">Act ${A.n} · ${A.name} <span class="look">${A.look}</span></h2><div class="muted">${fmt(ss[0].t0)}–${fmt(ss[ss.length - 1].t1)} · ${A.why}</div></div>`)); }
+    st.s[S.id] = st.s[S.id] || {};
+    const c = el(`<div class="card seg" id="${S.id}">
+      <div class="seg-h"><span class="id">${S.id}</span><h3>${S.title}</h3><span class="time">${fmt(t.t0)} – ${fmt(t.t1)} · ${(t.t1 - t.t0).toFixed(1)} s</span></div>
+      <div class="script">${t.lines.map((l) => `<span class="l"><span class="t">${l.t0.toFixed(1)}</span>${l.text}</span>`).join('')}</div>
+      ${(S.flags || []).map((f) => `<div class="flag">${f}</div>`).join(' ')}
+      <div class="panels n${S.panels.length}">${S.panels.map(([lab, at, svg]) => `<div class="panel">${svg}<div class="cap"><b>${lab}</b> · ${at.toFixed(1)} s</div></div>`).join('')}</div>
+      <div class="plan">
+        <b>Text</b><div>${S.text}</div>
+        <b>Visual</b><div><i>Start:</i> ${S.visual.start} <i>Build:</i> ${S.visual.build} <i>Peak:</i> ${S.visual.peak}</div>
+        <b>Primary mover</b><div>${S.mover}</div>
+        <b>Into next</b><div>${S.move[0] === 'End' ? 'End of film.' : `<b style="color:var(--ink)">${S.move[0]}</b>. ${S.move[1]}`}</div>
+        <b>Sound</b><div>${S.sfx}</div>
+      </div>
+      <div class="tune"></div></div>`);
+    const tune = c.querySelector('.tune');
+    groups(S.opts).forEach(([gid, lab, ch]) => {
+      const g = el(`<div class="grp"><div class="lab">${lab}</div><div class="chips"></div><div class="desc"></div></div>`);
+      const chips = g.querySelector('.chips'), desc = g.querySelector('.desc');
+      const cur = () => st.s[S.id][gid] || 'plan';
+      const paint = () => { chips.querySelectorAll('.chip').forEach((b) => b.classList.toggle('on', b.dataset.k === cur())); const o = ch.find((x) => x[0] === cur()); desc.textContent = o && o[2] ? o[2] : ''; };
+      ch.forEach(([k, l, d]) => { const b = el(`<button class="chip" data-k="${k}" title="${(d || 'As in the plan above').replace(/"/g, '&quot;')}">${l}</button>`); b.onclick = () => { if (k === 'plan') delete st.s[S.id][gid]; else st.s[S.id][gid] = k; paint(); save(); }; chips.appendChild(b); });
+      paint(); tune.appendChild(g);
+    });
+    const n = el(`<div class="grp note-grp"><div class="lab">Note</div><textarea placeholder="Anything else for ${S.id}: wording, timing, an idea…"></textarea></div>`);
+    const ta = n.querySelector('textarea'); ta.value = st.s[S.id].note || ''; ta.oninput = () => { st.s[S.id].note = ta.value; save(); };
+    tune.appendChild(n); box.appendChild(c);
+  });
+
+  // export
+  function text() {
+    const L = ['MotionLab storyboard v1: my choices', ''];
+    L.push('Film-wide:');
+    L.push(`- ${SC.text()}`);
+    GLOBALS.forEach((g) => { const o = g.opts.find((x) => x[0] === st.g[g.id]); L.push(`- ${g.q}: ${o[1]}${o[2] ? ' (recommended)' : ' (CHANGED)'}`); });
+    L.push('', 'Segments (anything not listed: as planned):');
+    let any = false;
+    SEGS.forEach((S) => {
+      const s = st.s[S.id] || {}, parts = [];
+      groups(S.opts).forEach(([gid, lab, ch]) => { const k = s[gid]; if (k && k !== 'plan') { const o = ch.find((x) => x[0] === k); parts.push(`${lab}: ${o[1]} (${o[2]})`); } });
+      if (s.note && s.note.trim()) parts.push(`Note: ${s.note.trim()}`);
+      if (parts.length) { any = true; L.push(`- ${S.id} ${S.title}:`); parts.forEach((p) => L.push(`    ${p}`)); }
+    });
+    if (!any) L.push('- none: every segment as planned');
+    return L.join('\n');
+  }
+  function count() { let n = 0; Object.values(st.s).forEach((s) => { n += Object.keys(s).filter((k) => k !== 'note' || (s.note || '').trim()).length; }); document.getElementById('count').textContent = n ? `${n} segment change${n > 1 ? 's' : ''}` : 'Everything as planned'; }
+  const out = document.getElementById('out');
+  document.getElementById('copy').onclick = async () => { out.value = text(); try { await navigator.clipboard.writeText(out.value); document.getElementById('copy').textContent = 'Copied ✓ paste it in the chat'; setTimeout(() => { document.getElementById('copy').textContent = 'Copy my choices'; }, 2500); } catch (e) { out.style.display = 'block'; out.select(); } };
+  document.getElementById('show').onclick = () => { out.value = text(); out.style.display = out.style.display === 'block' ? 'none' : 'block'; };
+  document.getElementById('reset').onclick = () => { if (confirm('Reset every choice and note?')) { localStorage.removeItem(KEY); location.reload(); } };
+  save();
+})();
+</script>
+</body>
+</html>

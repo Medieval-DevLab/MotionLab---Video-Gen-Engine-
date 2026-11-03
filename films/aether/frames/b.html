@@ -1,0 +1,25 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../../../styles/journey/tokens.css">
+<!-- Style frame B: "Introducing Aether, the AI-powered supply chain control tower."
+     Chapter card on the deep-purple ground, T3 centre slot; the journey line crosses as a light thread. -->
+<style> .scene { position: absolute; inset: 0; } </style><style>.ico{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.chip.l{width:128px;height:128px}.chip.l svg{width:56px;height:56px}</style></head>
+<body><div class="frame deep">
+  <svg width="0" height="0" style="position:absolute"><defs><symbol id="i-truck" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></symbol><symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></symbol><symbol id="i-warehouse" viewBox="0 0 24 24"><path d="M18 21V10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v11"/><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 1.132-1.803l7.95-3.974a2 2 0 0 1 1.837 0l7.948 3.974A2 2 0 0 1 22 8z"/><path d="M6 13h12"/><path d="M6 17h12"/></symbol><symbol id="i-network" viewBox="0 0 24 24"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></symbol></defs></svg>
+  <div class="ground"><i class="light"></i><i class="lattice"></i><i class="arc"></i><i class="arc inner"></i><i class="vignette"></i><i class="grain"></i></div>
+  <!-- depth, far (v2 only) -->
+  <div class="depth"></div>
+  <svg class="scene" width="1920" height="1080" viewBox="0 0 1920 1080">
+    <path d="M 0 790 C 600 820, 1320 760, 1920 790" fill="none" stroke="#D7A8FF" stroke-width="3" opacity=".55"/>
+    <circle cx="960" cy="790" r="20" fill="none" stroke="#D7A8FF" stroke-width="2" opacity=".6"/>
+    <circle cx="960" cy="790" r="8" fill="#FFFFFF"/>
+  </svg>
+  <div class="T3">
+    <div class="t-label k">Introducing</div>
+    <div class="gap-2u"></div>
+    <div class="t-display">Aether</div>
+    <div style="height:24px"></div>
+    <div class="t-sub">The AI-powered supply chain control tower</div>
+  </div>
+</div>
+<script>document.querySelector(".frame").classList.add("bg-" + (new URLSearchParams(location.search).get("bg") || "v2"));</script>
+</body></html>

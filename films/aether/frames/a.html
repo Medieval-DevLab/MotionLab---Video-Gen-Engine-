@@ -1,0 +1,89 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../../../styles/journey/tokens.css">
+<!-- Style frame A: "A shipment is delayed in Singapore. Three factories have just 48 hours of inventory remaining."
+     Light ground, T2 headline band, V-stage journey picture. Move into the next segment: Build. -->
+<style>
+  .scene { position: absolute; inset: 0; }
+  .abs { position: absolute; }
+  .delayed { display: flex; align-items: center; gap: 8px; height: 56px; padding: 0 20px 0 16px; background: #FDECEE; color: var(--risk); }
+  .meter { display: flex; align-items: center; gap: 12px; }
+  .meter svg { width: 32px; height: 32px; color: var(--risk); }
+</style><style>.ico{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.chip.l{width:128px;height:128px}.chip.l svg{width:56px;height:56px}</style></head>
+<body><div class="frame">
+  <svg width="0" height="0" style="position:absolute"><defs><symbol id="i-ship" viewBox="0 0 24 24"><path d="M12 2v2"/><path d="M12 9.189V13"/><path d="M19 12V6a2 2 0 00-2-2H7a2 2 0 00-2 2v6"/><path d="M19.38 19A11.6 11.6 0 0021 13l-8.188-3.639a2 2 0 00-1.624 0L3 13.001a11.6 11.6 0 002.81 7.76"/><path d="M2 20c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1s1.2 1 2.5 1c2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></symbol><symbol id="i-truck" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></symbol><symbol id="i-container" viewBox="0 0 24 24"><path d="M22 7.7c0-.6-.4-1.2-.8-1.5l-6.3-3.9a1.72 1.72 0 0 0-1.7 0l-10.3 6c-.5.2-.9.8-.9 1.4v6.6c0 .5.4 1.2.8 1.5l6.3 3.9a1.72 1.72 0 0 0 1.7 0l10.3-6c.5-.3.9-1 .9-1.5Z"/><path d="M10 21.9V14L2.1 9.1"/><path d="m10 14 11.9-6.9"/><path d="M14 19.8v-8.1"/><path d="M18 17.5V9.4"/></symbol><symbol id="i-warehouse" viewBox="0 0 24 24"><path d="M18 21V10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v11"/><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 1.132-1.803l7.95-3.974a2 2 0 0 1 1.837 0l7.948 3.974A2 2 0 0 1 22 8z"/><path d="M6 13h12"/><path d="M6 17h12"/></symbol><symbol id="i-package" viewBox="0 0 24 24"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/></symbol></defs></svg>
+  <div class="ground"><i class="light"></i><i class="lattice"></i><i class="arc"></i><i class="arc inner"></i><i class="vignette"></i><i class="grain"></i></div>
+  <!-- depth, far (v2 only) -->
+  <div class="depth"><div class="chip s far" style="left:1330px; top:180px;"><svg class="ico"><use href="#i-ship"/></svg></div><div class="chip s far" style="left:1730px; top:170px;"><svg class="ico"><use href="#i-container"/></svg></div><div class="chip s far" style="left:930px; top:930px;"><svg class="ico"><use href="#i-package"/></svg></div></div>
+
+  <div class="T2">
+    <div class="t-head">A shipment is <span class="k">delayed</span><br>in Singapore</div>
+    <div class="gap-2u"></div>
+    <div class="t-sub">Three factories have 48 hours of inventory remaining.</div>
+  </div>
+
+  <svg class="scene" width="1920" height="1080" viewBox="0 0 1920 1080">
+    <!-- port: water plate and crane (soft-flat, palette tints) -->
+    <defs><linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E9E2F4"/><stop offset="1" stop-color="#F4F0FA"/></linearGradient></defs>
+    <rect x="120" y="776" width="640" height="128" rx="16" fill="url(#sea)"/>
+    <g stroke="#DCD2EA" stroke-width="3" stroke-linecap="round">
+      <line x1="160" y1="828" x2="280" y2="828"/><line x1="520" y1="844" x2="700" y2="844"/><line x1="232" y1="872" x2="440" y2="872"/>
+    </g>
+    <rect x="184" y="560" width="20" height="216" fill="#DCD2EA"/>
+    <rect x="184" y="560" width="188" height="16" fill="#DCD2EA"/>
+    <rect x="152" y="560" width="32" height="16" fill="#DCD2EA"/>
+    <line x1="352" y1="576" x2="352" y2="640" stroke="#CFC3E3" stroke-width="2"/>
+    <!-- the subject: the shipment (its containers carry the purple) -->
+    <g>
+      <rect x="312" y="672" width="64" height="64" rx="6" fill="#4A3A63"/>
+      <rect x="324" y="684" width="16" height="10" rx="2" fill="#F7F5FA" opacity=".8"/>
+      <rect x="348" y="684" width="16" height="10" rx="2" fill="#F7F5FA" opacity=".8"/>
+      <g>
+        <rect x="392" y="700" width="56" height="36" rx="3" fill="#A100FF"/>
+        <rect x="452" y="700" width="56" height="36" rx="3" fill="#CFA0FF"/>
+        <rect x="512" y="700" width="56" height="36" rx="3" fill="#A100FF"/>
+        <rect x="572" y="700" width="56" height="36" rx="3" fill="#E4CCFF"/>
+        <rect x="632" y="700" width="56" height="36" rx="3" fill="#B84DFF"/>
+        <rect x="422" y="660" width="56" height="36" rx="3" fill="#E4CCFF"/>
+        <rect x="482" y="660" width="56" height="36" rx="3" fill="#A100FF"/>
+        <rect x="542" y="660" width="56" height="36" rx="3" fill="#CFA0FF"/>
+        <rect x="602" y="660" width="56" height="36" rx="3" fill="#B84DFF"/>
+      </g>
+      <polygon points="296,736 720,736 688,800 328,800" fill="#2E2240"/>
+    </g>
+    <!-- journey line: stalled at the ship, the planned route ahead is dashed -->
+    <circle cx="736" cy="768" r="18" fill="none" stroke="#A100FF" stroke-width="2" opacity=".3"/>
+    <circle cx="736" cy="768" r="9" fill="#A100FF"/>
+    <g fill="none" stroke="#A100FF" stroke-width="4" stroke-dasharray="12 12" opacity=".55">
+      <path d="M 760 768 C 960 768, 960 708, 1102 708"/>
+      <path d="M 1126 708 C 1200 696, 1250 560, 1382 560" stroke-dashoffset="12"/>
+      <path d="M 1126 708 L 1382 708" stroke-dashoffset="12"/>
+      <path d="M 1126 708 C 1200 720, 1250 856, 1382 856" stroke-dashoffset="12"/>
+    </g>
+    <circle cx="1114" cy="708" r="7" fill="#A100FF" opacity=".55"/>
+    <!-- one grouped label for the three factories, not three copies -->
+    <path d="M 1532 484 H 1540 V 892 H 1532" fill="none" stroke="#D5CCE3" stroke-width="2"/>
+    <!-- three factories (stations), one per row, col 10 -->
+    <g id="factory">
+      <rect x="1398" y="532" width="118" height="64" rx="6" fill="#E6DCF3"/>
+      <polygon points="1398,532 1398,504 1437,532 1437,504 1476,532 1476,504 1516,532" fill="#D6C6EE"/>
+      <rect x="1490" y="484" width="14" height="36" fill="#D6C6EE"/>
+      <rect x="1414" y="556" width="24" height="24" rx="3" fill="#F7F5FA"/>
+      <rect x="1450" y="556" width="24" height="24" rx="3" fill="#F7F5FA"/>
+    </g>
+    <use href="#factory" y="148"/>
+    <use href="#factory" y="296"/>
+  </svg>
+
+  <!-- labels and state, 16 px from their objects, on the grid -->
+  <div class="abs card pill delayed t-label" style="left:418px; top:588px;">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    Delayed
+  </div>
+  <div class="abs t-label" style="left:120px; top:920px; color:var(--ink-2);">Singapore</div>
+  <div class="abs meter t-label" style="left:1564px; top:668px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>48 h left</div>
+
+  <!-- depth, near (v2 only) -->
+  <div class="depth"><div class="chip l near" style="left:1872px; top:1016px;"><svg class="ico"><use href="#i-container"/></svg></div></div>
+</div>
+<script>document.querySelector(".frame").classList.add("bg-" + (new URLSearchParams(location.search).get("bg") || "v2"));</script>
+</body></html>

@@ -1,0 +1,83 @@
+"""Builds the style library pages (recipes/*.md, README.md, CRAFT.md) from library.json, the library's single
+source. Our own words throughout. usage: python -I style-library/build.py"""
+import json, os, re
+HERE = os.path.dirname(os.path.abspath(__file__)); L = json.load(open(os.path.join(HERE, 'library.json'), encoding='utf-8'))
+DIALS = ['Energy', 'Pace', 'Camera', 'Density', 'Background', 'Type', 'Realism', 'Sound']
+cap = lambda x: x[:1].upper() + x[1:]
+sg = lambda v: '+' + str(v) if v > 0 else ('−' + str(-v) if v < 0 else '0')
+def prompt(s):
+    d = ', '.join(f'{n} {sg(v)}' for n, v in zip(DIALS, s['dials']))
+    return (f"Direct this film (or these segments) in the **{s['name']}** style. Follow the script word for word, time everything to "
+            f"the voiceover clock, and show me the storyboard before building.\n\n"
+            f"- **Look:** {s['look']}\n- **Motion:** {s['motion']}\n- **Shape of the piece:** {s['structure']}\n"
+            f"- **Rules:** {s['rules']}\n- **Ask me first for:** {s['ask']}\n- **Tuning scale:** {d}.\n"
+            f"- **Build it with:** {s['kit']}. Keep to the engine's craft rules: one primary mover, scenes that open sparse and build, "
+            f"text that is readable before anything ornamental moves.")
+os.makedirs(os.path.join(HERE, 'recipes'), exist_ok=True)
+for s in L['styles']:
+    dial_row = '| ' + ' | '.join(DIALS) + ' |\n|' + '---|' * 8 + '\n| ' + ' | '.join(sg(v) for v in s['dials']) + ' |'
+    md = f"""# {s['name']}
+
+![{s['name']}](../stills/{s['id']}.jpg)
+
+**{s['line']}** · Fit for our films: **{s['fit']}** · Live demo: [`demos/demo.html#{s['id']}`](../demos/demo.html#{s['id']})
+
+## The look
+{cap(s['look'])}
+
+## How it moves
+{cap(s['motion'])}
+
+## Shape of a piece
+{cap(s['structure'])}
+
+## Craft rules
+{cap(s['rules'])}
+
+## Ask for, before building
+{cap(s['ask'])}
+
+## Where it fits
+{cap(s['uses'])}
+
+## Build it with our kit
+{s['kit']}
+
+**Small helpers it would want (none built yet; the engine is unchanged):** {cap(s['missing'])}
+
+## Tuning scale
+{dial_row}
+
+## Our director prompt
+{prompt(s)}
+"""
+    open(os.path.join(HERE, 'recipes', s['id'] + '.md'), 'w', encoding='utf-8', newline='\n').write(md)
+# README: the index
+rows = '\n'.join(f"| [![{s['name']}](stills/{s['id']}.jpg)](recipes/{s['id']}.md) | **[{s['name']}](recipes/{s['id']}.md)**<br>{s['line']}<br><sub>{s['fit']} · {s['uses_short']}</sub> |" for s in L['styles'])
+skip = '\n'.join(f"- **{k}:** {v}" for k, v in L['skip'])
+open(os.path.join(HERE, 'README.md'), 'w', encoding='utf-8', newline='\n').write(f"""# Style library
+
+{L['intro']}
+
+**How to use it:**
+1. Pick a style for the film, or for one segment. Each recipe says when it fits.
+2. Use its tuning-scale setting as the starting preset.
+3. Paste its director prompt into the brief, filled in with the script.
+4. Watch the live demo (`demos/demo.html#<style>` in a browser) to see the motion.
+
+The demos are built with the engine's own kit and change nothing in it. Craft techniques that apply across styles are
+in [CRAFT.md](CRAFT.md).
+
+| Still | Style |
+|---|---|
+{rows}
+
+## What this library leaves out
+{skip}
+
+Rebuild these pages with `python -I style-library/build.py`. Render the stills with `node style-library/demos/stills.mjs`
+(wrap it in the heavy lock).
+""")
+tech = '\n'.join(f"{i + 1}. **{t[0]}** {t[1]}" for i, t in enumerate(L['craft']))
+open(os.path.join(HERE, 'CRAFT.md'), 'w', encoding='utf-8', newline='\n').write(f"# Craft techniques across styles\n\n{L['craft_intro']}\n\n{tech}\n")
+print('built', len(L['styles']), 'recipes + README + CRAFT')

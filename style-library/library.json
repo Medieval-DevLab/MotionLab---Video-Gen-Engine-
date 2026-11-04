@@ -1,0 +1,593 @@
+{
+ "intro": "Nineteen visual styles for premium B2B films. Each has a recipe, a director prompt in our own words, a tuning-scale setting and a live demo built on the engine's kit. The library was distilled from a study of several hundred code-built motion pieces, then rewritten for how we work: follow the script, time everything to the voiceover, and storyboard first. Nothing here is copied, and nothing changes the engine.",
+ "craft_intro": "Techniques that make the difference in every style, and how each applies to our engine. They are notes for the director; none of them is built into the engine yet.",
+ "styles": [
+  {
+   "id": "morph-ui-loop",
+   "name": "Morphing-shape UI loop",
+   "fit": "Adapt: needs a small helper or a stylisation",
+   "line": "One rounded shape turns into button, loader, player, slider, toast and back, driven by a cursor on a beat grid",
+   "look": "warm light-grey stage, black-and-white components, one accent, one clean grotesque, consistent icon strokes, soft shadows that grow as a shape \"lifts\". No gradients on the UI chrome.",
+   "motion": "one persistent rounded rectangle changes width, height, radius and colour through every state, while its content swaps behind a short blur. A cursor causes every change. Indicators stretch because their two edges ride different springs. Drags follow the cursor, then spring from the release. The camera keeps each state at about half the frame and settles more slowly than the shape.",
+   "structure": "shape, click, loader, check, widget, slider with an over-drag rubber-band, toggle, tabs, a self-drawing chart with tooltip, command palette, toast, back to the shape. Something lands on every beat.",
+   "rules": "content enters after a morph starts and leaves before the next. Never fade dark into the accent; carry an accent element instead. Overshoot stays tiny.",
+   "ask": "8–12 real UI states with real data, accent colour, fonts, the product's own components.",
+   "uses": "feature-launch micro-films, a 10–15 s product signature, a social cut of a walkthrough.",
+   "uses_short": "feature-launch micro-films",
+   "kit": "screencast parts (buttons, lists, modals, toasts, typed inputs, cursor), camera push-ins, word swaps.",
+   "missing": "a closed-form spring helper; a \"morph box\" (rect whose geometry and colour are spring chains, with its own content clip); a two-edge stretch indicator; a drag-and-release helper.",
+   "dials": [
+    1,
+    1,
+    1,
+    -1,
+    -2,
+    0,
+    0,
+    1
+   ]
+  },
+  {
+   "id": "continuous-take",
+   "name": "Continuous-take launch film",
+   "fit": "Adapt: needs a small helper or a stylisation",
+   "line": "No cuts: floods, irises, pills and glass panels grow each scene out of the last",
+   "look": "off-white canvas with black UI, or a dark world shown inside a shape. Frosted glass panels over photos, a single accent, real photos inside the design.",
+   "motion": "no cuts or crossfades. A dot opens like an iris onto the next world, a button floods the frame and contracts into the next object, blobs split and merge with a goo effect. Each morph glides about 0.8 s on one strong in-out curve that the camera zoom shares. One gesture per scene.",
+   "structure": "wordmark collapses into its period, the period opens, the ask is typed, a result builds, proof (calendar, chart or notifications), a call-to-action button, and the scene closes back into the dot.",
+   "rules": "see techniques 3–4. Never zoom into an off-centre dot; open it instead. A handoff object morphs inside the camera transform of the scene it leaves.",
+   "ask": "wordmark, one-line job the product does, three outcomes, aligned day/night or before/after photos.",
+   "uses": "product launches, \"how it works in one breath\" openers, event openers.",
+   "uses_short": "product launches",
+   "kit": "continuity moves, camera, kinetic text mask wipes, screencast UI, real photos.",
+   "missing": "flood/iris helper (area-eased), goo split/merge filter (blur plus alpha threshold), glass panel (pre-blurred copy of the backdrop, clipped, tinted, rim-lit).",
+   "dials": [
+    1,
+    1,
+    1,
+    0,
+    -1,
+    0,
+    1,
+    1
+   ]
+  },
+  {
+   "id": "premium-product",
+   "name": "Restrained premium product film",
+   "fit": "Ready: our kit builds it today",
+   "line": "Dark, precise, expensive-looking product reveal with the real UI as hero and almost no copy",
+   "look": "deep navy or graphite, one precious accent used sparingly (a gold or a single brand colour), crisp real UI, a monospace face for numbers, soft rim light, faint bloom, gentle vignette, grain only if it helps.",
+   "motion": "one shot, one idea. Transitions are object-driven: a chart point becomes a card's corner, a number becomes the next screen's amount. Staggered arrivals, overshoot under about 2%, a camera that moves like a macro product shoot.",
+   "structure": "a glint reveals part of the mark; the hero surface resolves (number, then chart, then support metrics); chaos-to-order transformation; a calmer beat where the rhythm slows; pull out, the UI folds into one object, the wordmark holds.",
+   "rules": "about four ideas per 15 s, product by about 2 s, 3–4 words of copy per scene. Every key frame should work as a still ad.",
+   "ask": "brand tokens and wordmark, current real screens, the real positioning line, safe demo values.",
+   "uses": "flagship launch, investor or executive opener, website hero.",
+   "uses_short": "flagship launch",
+   "kit": "camera with parallax, screencast rebuilt in layers, light sweeps, shader grain and mesh gradient, the glide ease.",
+   "missing": "a specular sweep across a UI card; a shared-element handoff registry (record the exact pixel box an object lands on, so both scenes use it).",
+   "dials": [
+    -1,
+    -1,
+    1,
+    -2,
+    -1,
+    -1,
+    1,
+    -1
+   ]
+  },
+  {
+   "id": "real-ui-promo",
+   "name": "Real-UI product promo",
+   "fit": "Ready: our kit builds it today",
+   "line": "The bulk: launch or promo videos built from a product's own site, repo, screenshots and brand tokens",
+   "look": "whatever the brand owns. The common thread is \"use our real UI, not generic components\": rebuilt screens, the real logo, the real palette.",
+   "motion": "surfaces rise with a slight tilt that settles frontal, rows stagger in, a search types, a result expands into a hero card. Ideas last about a second, handoffs stay smooth, and one recurring element (player bar, sidebar, input) ties the shots.",
+   "structure": "problem hook, product appears, three proof moments (one feature each, shown not told), outcome line, wordmark and URL.",
+   "rules": "inspect the real product first; never invent features, customers or metrics (technique 13). It must work muted.",
+   "ask": "URL or repo, screenshots, brand tokens, the three things it does, the claim guardrails (what not to say).",
+   "uses": "launch, feature release, ads, sales-deck video.",
+   "uses_short": "launch",
+   "kit": "screencast treatment, kinetic text, living ground, data pieces, music and SFX.",
+   "missing": "a brand-token import (colours and fonts from a CSS or token file into our theme); a \"recurring anchor\" slot that persists across segments.",
+   "dials": [
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0
+   ]
+  },
+  {
+   "id": "screen-walkthrough",
+   "name": "Screen-guided walkthrough / how-to",
+   "fit": "Ready: our kit builds it today",
+   "line": "Cursor, clicks and tracking zooms through real screens; \"5 features\" or tutorial shorts",
+   "look": "real app windows on a calm ground, a slightly oversized cursor, a soft spotlight on the active region, step labels.",
+   "motion": "screen-recorder-style zooms keyed on [time, zoom, x, y] in log space, a cursor that scales with the camera, click ripples, natural typing rhythm. Pushes last 1.5–3 s on gentle curves, about half the default speed.",
+   "structure": "title, then per step: zoom to region, act, result, short caption. Recap list with ticks drawing on.",
+   "rules": "cursor grammar (technique 16); every action shows a visible result; captions short and verbatim.",
+   "ask": "ordered screenshots or recordings, the step script, which region matters in each step.",
+   "uses": "onboarding, knowledge-transfer videos, release notes, support how-tos.",
+   "uses_short": "onboarding",
+   "kit": "screencast treatment, camera, kinetic captions. Our walkthrough film already proves it.",
+   "missing": "a dim-and-spotlight mask; a cursor path solver (lead the target, speed cap, settle).",
+   "dials": [
+    -1,
+    -1,
+    1,
+    -1,
+    -1,
+    -1,
+    2,
+    -1
+   ]
+  },
+  {
+   "id": "showreel",
+   "name": "Motion-designer showreel / sizzle",
+   "fit": "Adapt: needs a small helper or a stylisation",
+   "line": "\"Show me what you can do\": high-variety reel of techniques, usually 10–20 s",
+   "look": "usually too much (many styles in 15 s). The good ones push a single idea.",
+   "motion": "a beat on every quarter note, scene changes on downbeats, scale swings from close to wide to full-frame type, whips and smash-pans.",
+   "structure": "hook frame that is already finished, three to five \"signature moments\", a lockup.",
+   "rules": "12–15 compositions per 30 s, each 1.4–3.5 s; never repeat a layout; name three signature moments without effect names.",
+   "ask": "the single formal idea, the brand, the three moments.",
+   "uses": "agency or team sizzle, event opener, a brand-energy 10 s cut. Tame it with our \"never too much\" rule.",
+   "uses_short": "agency or team sizzle",
+   "kit": "everything, which is the risk; the tuning scale restrains it.",
+   "missing": "a beat-grid scheduler that snaps cues to a grid (with an early-start offset); a per-film ban list checked at board time.",
+   "dials": [
+    2,
+    2,
+    1,
+    1,
+    1,
+    1,
+    -1,
+    2
+   ]
+  },
+  {
+   "id": "kinetic-type",
+   "name": "Kinetic typography: speech, quote, manifesto",
+   "fit": "Ready: our kit builds it today",
+   "line": "The words are the picture; layout and geometry act out the rhetoric",
+   "look": "one dark or paper ground, a confident grotesque or high-contrast serif, a single structural accent, fine geometric guides (orbits, rules, baselines). No illustrations or clichés behind the words.",
+   "motion": "the words get physical roles. A baseline becomes a trajectory, a heavy word becomes a lintel, a letter's counter becomes an aperture into the next scene. Phrases reveal in spoken groups. A reading hold comes before any ornamental travel. Three named camera operations, each with a rhetorical purpose.",
+   "structure": "statement, then pressure or problem, turn, resolution, held declaration, and the end returns to the opening.",
+   "rules": "exact words in exact order. Earn at least one moment of total stillness. Blur trailing geometry, never the active text. Deform only what the metaphor needs.",
+   "ask": "the exact text, the three words to land hardest, the central metaphor.",
+   "uses": "CEO quotes, mission statements, values films, keynote interstitials.",
+   "uses_short": "CEO quotes",
+   "kit": "kinetic text (all entrances), mask wipes, word swaps, living ground, camera.",
+   "missing": "text-on-path with arc-length spacing; text as a mask for the next scene (glyph outlines revealing the incoming shot).",
+   "dials": [
+    0,
+    -1,
+    0,
+    -2,
+    -1,
+    2,
+    -2,
+    -1
+   ]
+  },
+  {
+   "id": "loud-poster",
+   "name": "Loud poster / op-art trailer",
+   "fit": "Adapt: needs a small helper or a stylisation",
+   "line": "Bold condensed type, sunbursts, stickers, stamps, tickers and print offsets",
+   "look": "saturated cobalt, pink, tangerine and cream (or black with magenta and acid green), extra-condensed black type for names, a mono face for labels, rotating sunbursts, scrolling waves, die-cut stickers with white borders, stamps, polaroids, a ticker round the frame edge, film grain.",
+   "motion": "the camera never rests (a slow 1.03–1.07 push per scene). Letters rise through a mask line one by one. Patterns rotate continuously rather than ticking per beat. Swaps are carousel glides of about 0.55 s, and colour changes fade over about 0.35 s. Print misregistration appears only on impact frames.",
+   "structure": "wordmark on the pattern, the drop with big stacked claims, a \"ticket\" or brief that fills in, proof, a call-to-action ticket, a poster lockup.",
+   "rules": "a pattern stepping one notch per beat reads as stutter, so rotate it smoothly and pick speeds that land on the same pattern at the end. No full stops after headlines. Keep three type roles only.",
+   "ask": "a bold palette, one tagline, real clips or portraits, the drop time.",
+   "uses": "consumer-facing or creator-economy launches, event promos, recruiting. Use sparingly in premium films.",
+   "uses_short": "consumer-facing or creator-economy launches",
+   "kit": "living ground rays and waves, kinetic text, real photos, camera.",
+   "missing": "a sticker border (alpha dilation plus shadow), stamp press, edge ticker, misregistration offset.",
+   "dials": [
+    2,
+    1,
+    1,
+    1,
+    2,
+    2,
+    0,
+    1
+   ]
+  },
+  {
+   "id": "logo-ident",
+   "name": "Logo ident, bumper and reveal",
+   "fit": "Ready: our kit builds it today",
+   "line": "Short marks: wireframe-to-solid, letters folding into a dot, assembly reveals",
+   "look": "a black or brand-colour field, the real mark, at most one supporting texture.",
+   "motion": "the mark is drawn as wireframe and then filled. Pieces fly in and lock. Letters squeeze toward the dot like an accordion, with their drawn width following. Rays fan out of a single line. A micro-breath (scale 1.000 to 1.012) works on the hold.",
+   "structure": "glint or line, construction, lock, tagline, hold. Often a loop.",
+   "rules": "never redraw or approximate the logo. The final frame needs enough stillness to register. No generic logo fade.",
+   "ask": "vector logo, tagline, colour values, intended length.",
+   "uses": "film open and close, segment bumpers, webinar intro.",
+   "uses_short": "film open and close",
+   "kit": "hand-drawn stroke draw-on, kinetic letters, light sweep, shader grounds.",
+   "missing": "SVG path draw-on for the real logo with fill handoff; per-letter width squeeze.",
+   "dials": [
+    0,
+    0,
+    -1,
+    -2,
+    -1,
+    1,
+    -1,
+    0
+   ]
+  },
+  {
+   "id": "data-story",
+   "name": "Data story and numbers",
+   "fit": "Ready: our kit builds it today",
+   "line": "Counters, scale comparisons, unit marbles, charts that act",
+   "look": "tabular numerals, fixed unit labels, one highlight colour, plenty of air, hatched/solid/outline states for past, present and future.",
+   "motion": "numbers roll only while moving and then settle sharply. Counters run on the film's global clock, so they keep running through cutaways. A line chart draws from the same function that moves a dot. The current bar fills solid while earlier bars are hatched. One-unit changes are staged as the decisive event.",
+   "structure": "the question, the scale reference, the reveal number, the comparison, the meaning line.",
+   "rules": "a frozen counter means a broken render. Real data, honest uncertainty. Lay results out so they compare at a glance.",
+   "ask": "a data file with source, the one number that matters, the comparison.",
+   "uses": "results, ROI, executive summaries, annual reviews.",
+   "uses_short": "results",
+   "kit": "data storytelling (bars, lines, donut, counters, unit charts, pinned notes).",
+   "missing": "a global-clock counter mode; a chart-follows-dot coupling; past/now/future bar states.",
+   "dials": [
+    0,
+    0,
+    0,
+    0,
+    -1,
+    0,
+    0,
+    -1
+   ]
+  },
+  {
+   "id": "mechanism-explainer",
+   "name": "Diagrammatic concept / mechanism explainer",
+   "fit": "Ready: our kit builds it today",
+   "line": "Systems, algorithms, science and proofs shown as working machines or diagrams",
+   "look": "porcelain or dark ground, graphite lines, one working colour and one warning colour, a tabular mono for calculations, a heavy grotesque for statements. Diagrams look like engraved instruments, not clip art.",
+   "motion": "every mechanical action corresponds to a step in the argument: wheels lock, a belt couples them, a single unit advances the output, gates show remainders. Simulate the real thing where it is cheap (a genuine random walk rather than a drawing of one), seeded so it stays deterministic.",
+   "structure": "claim, setup, operation 1..n, the twist, the general statement, a reset to the opening.",
+   "rules": "the mechanism demonstrates; it does not decorate. Copy is locked and never overclaims.",
+   "ask": "the exact argument steps, one worked example, what must not be claimed.",
+   "uses": "\"how it works\", architecture explainers, security and compliance concepts.",
+   "uses_short": "\"how it works\"",
+   "kit": "hand-drawn arrows, isometric, data pieces, kinetic text, camera.",
+   "missing": "small mechanism primitives (gear, belt, gate, rack, pipe) with linked rotation; a seeded-random helper; simple maths typesetting.",
+   "dials": [
+    -1,
+    -1,
+    0,
+    0,
+    -1,
+    0,
+    -1,
+    -1
+   ]
+  },
+  {
+   "id": "storybook",
+   "name": "Storybook, hand-drawn and paper collage",
+   "fit": "Ready: our kit builds it today",
+   "line": "Paper grain, crayon, doodles, cut paper, whiteboard; whimsical explainers",
+   "look": "off-white paper with grain and tooth, crayon or pencil lines that wobble slightly, cut-paper shapes with soft drop shadows, one or two inks, typewriter-tape labels, a warm vignette.",
+   "motion": "lines boil (re-seeded jitter several times a second). Motion is quantised \"on twos\" for a handmade feel even at 60 fps. Paper pieces slide and land with tiny settles. Onomatopoeia and callbacks hold attention.",
+   "structure": "character or object intro, problem, journey with two or three gags, insight, a callback ending.",
+   "rules": "write a style bible and component kit first, so every scene is the same show. Keep texture cheap.",
+   "ask": "the script, tone, any brand palette, whether people appear (use real photos for people).",
+   "uses": "friendly explainers, HR and onboarding, customer education.",
+   "uses_short": "friendly explainers",
+   "kit": "hand-drawn line treatment (rough strokes, arrows, handwriting), grain shader, real photos as cut-outs.",
+   "missing": "a \"on twos\" time quantiser; a line boil; a cut-paper shadow style.",
+   "dials": [
+    0,
+    0,
+    -1,
+    0,
+    0,
+    0,
+    -2,
+    0
+   ]
+  },
+  {
+   "id": "blueprint-line",
+   "name": "Line evolution / blueprint drafting",
+   "fit": "Adapt: needs a small helper or a stylisation",
+   "line": "One line keeps being re-inked: pencil on paper, then blueprint, then light",
+   "look": "three inks for the same geometry: pencil on cream graph paper, white line on blueprint blue, and a lit line on black with a bright core and scan-line fills. A 60 px grid with every fifth line stronger. Each stage's accent becomes the next stage's base colour.",
+   "motion": "the camera is locked like a drafting table; objects turn instead. One line never leaves the screen. It becomes rails, curves with handles, shapes, tiles, gears and panels. Scene changes use a hard-edged shape flood or a single scan line.",
+   "structure": "a line, then type, curve, shape, tile, solid, mechanism, panel, data and lockup, one idea per bar.",
+   "rules": "keep a margin clear (nothing at rest near the edges). No glows; light comes from line density. A corner label carries chapter and beat count.",
+   "ask": "the \"promotion\" story (what the line becomes), three inks.",
+   "uses": "engineering or product-design stories, from concept to product.",
+   "uses_short": "engineering or product-design stories",
+   "kit": "hand-drawn strokes, dot/grid ground, isometric.",
+   "missing": "ink swap (one geometry, three renderers), hatching fill, dimension lines with live numbers.",
+   "dials": [
+    1,
+    1,
+    -2,
+    0,
+    0,
+    1,
+    -2,
+    0
+   ]
+  },
+  {
+   "id": "print-treatments",
+   "name": "Painterly and print-culture treatments",
+   "fit": "Adapt: needs a small helper or a stylisation",
+   "line": "Ink wash, risograph, halftone/manga, shadow puppets, oscilloscope, vase painting",
+   "look": "ink wash with paper fibre and dry brush; risograph two-ink offset; halftone dots and manga screentone; shadow-puppet silhouettes with jointed limbs behind a warm backlight; an oscilloscope trace; motifs painted around a vase.",
+   "motion": "brush reveals, ink blooms that swallow the page, halftone fields that respond to a moving object, joint-driven puppet poses, a print offset on impact.",
+   "structure": "used as a segment treatment, not a whole film. It works for one story beat or a cultural chapter.",
+   "rules": "commit to the medium's limits (two inks, one brush, silhouettes only). Keep text clean on top of it.",
+   "ask": "which medium, and why it suits the line.",
+   "uses": "regional or cultural campaigns, heritage stories, a chapter break in a long film.",
+   "uses_short": "regional or cultural campaigns",
+   "kit": "halftone and grain shaders, hand-drawn strokes, living ground.",
+   "missing": "a two-ink risograph palette with misregistration; an ink-bloom mask; jointed silhouette parts.",
+   "dials": [
+    0,
+    -1,
+    -1,
+    0,
+    1,
+    0,
+    -2,
+    0
+   ]
+  },
+  {
+   "id": "timeline",
+   "name": "Timeline / history chronicle",
+   "fit": "Ready: our kit builds it today",
+   "line": "Eras and years marching by: history of a field, company or life",
+   "look": "a horizontal rail or stacked years, large year numerals, an era palette that shifts with time, archival photos where real people appear.",
+   "motion": "the camera travels along the rail, years roll like counters, and each era enters with its own texture. Pace often quickens toward the present.",
+   "structure": "origin, three to six milestone stops, the present, an optional future glimpse.",
+   "rules": "one stop per moment with one image and one line. Dates and claims come from a facts file.",
+   "ask": "dated milestones with sources and photos.",
+   "uses": "company history, product evolution, anniversaries, a \"why now\" opener.",
+   "uses_short": "company history",
+   "kit": "camera pan with parallax, counters, real photos, kinetic text, continuity moves.",
+   "missing": "a timeline rail component (ticks, year counter, era tints).",
+   "dials": [
+    0,
+    0,
+    1,
+    0,
+    1,
+    0,
+    1,
+    0
+   ]
+  },
+  {
+   "id": "scale-dive",
+   "name": "Scale dive",
+   "fit": "Adapt: needs a small helper or a stylisation",
+   "line": "One unbroken zoom from room to device to chip to atom, or from street to cosmos",
+   "look": "each level is its own clean world (room, device, board, chip, transistor, atom) with consistent line language.",
+   "motion": "one continuous zoom. Each next world is drawn inside an object of the current one, and the zoom runs in log space so speed feels constant. The inner world zooms less than its frame, which reads as depth.",
+   "structure": "five to seven stops, each with one label and one number (for example the scale factor).",
+   "rules": "never zoom into an off-centre point (it swings). Re-centre or open the object instead. Hand off at a fixed on-screen size.",
+   "ask": "the levels and one fact per level.",
+   "uses": "infrastructure and hardware stories, \"from your desk to our data centre\", deep-tech explainers.",
+   "uses_short": "infrastructure and hardware stories",
+   "kit": "camera zoom, isometric, data labels.",
+   "missing": "a nested-scene zoom helper (a stack of levels, each mounted at a scale and a point inside its parent).",
+   "dials": [
+    1,
+    0,
+    2,
+    -1,
+    0,
+    -1,
+    -1,
+    0
+   ]
+  },
+  {
+   "id": "assembly-iso",
+   "name": "Assembly and isometric systems",
+   "fit": "Adapt: needs a small helper or a stylisation",
+   "line": "Things build themselves: construction steps, a data-centre tour, a sorting line",
+   "look": "an isometric or architectural-model look with a base plate, soft key light and rim, labels as clean overlays.",
+   "motion": "parts build in dependency order (foundation, frame, skin, systems). Sketch lines turn into solid shapes. A guided tour runs through zones.",
+   "structure": "empty plot, build stages, a living state (flows running), labelled call-outs.",
+   "rules": "only show structure where it explains layers, parts or placement. No floating parts, no gaps. Labels are overlays, never baked into the art.",
+   "ask": "the parts list and order, what each zone does.",
+   "uses": "platform architecture, supply chain, rollout plans.",
+   "uses_short": "platform architecture",
+   "kit": "isometric treatment, hand-drawn strokes, data flows.",
+   "missing": "a staged-build helper (stagger by dependency list); a stylised exploded view.",
+   "dials": [
+    0,
+    0,
+    1,
+    1,
+    -1,
+    -1,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "documentary",
+   "name": "Documentary / archival brand film",
+   "fit": "Adapt: needs a small helper or a stylisation",
+   "line": "Film texture, archival clips, captions on narration, one saturated hero object",
+   "look": "white, silver, cream and archival black, with one saturated hero object as the only colour. Real archival clips on a period TV, real old web pages, fresh grain every frame, halation on highlights, soft vignette, lifted blacks.",
+   "motion": "push into a real document. A cursor lands on one real item. Captions light word by word on the narration's timing. Hard cuts land on spoken words. The hero object is lit rim-first, colourless, and comes alive on the drop.",
+   "structure": "cold open on archive, the past, the bridge (the coined idea), the hero reveal, the proof curve, the brand at the very end.",
+   "rules": "one feeling, one idea, no feature tour. Captions of seven words or fewer, one layer at a time. Visuals keep moving when the narrator pauses.",
+   "ask": "public-domain archive clips, the coined word, the five-year vision line, the VO.",
+   "uses": "brand manifesto, category creation, investor narrative.",
+   "uses_short": "brand manifesto",
+   "kit": "real photos and footage, kinetic captions, grain shader, VO clock, music ducking.",
+   "missing": "a film-finish pass (per-frame grain, halation, edge-clamped colour fringe, gate weave); a period-screen frame; word-lit captions on VO word times.",
+   "dials": [
+    -1,
+    0,
+    0,
+    -1,
+    0,
+    -1,
+    2,
+    0
+   ]
+  },
+  {
+   "id": "podcast-inserts",
+   "name": "Talking-head and podcast graphic inserts",
+   "fit": "Adapt: needs a small helper or a stylisation",
+   "line": "Full-screen explainer cards cut into a recorded conversation, with a speaker in a corner frame",
+   "look": "a shared style bible across 30–50 inserts (paper, tape labels, halftone print), brand colours, a static logo corner.",
+   "motion": "an insert covers a stretch of talk, synced to the spoken words, with the speaker kept in a corner frame following whoever talks. No punch-ins on the faces.",
+   "structure": "per insert, 4–10 s: concept title, one diagram build, a pay-off line. Leave a few seconds of faces between inserts.",
+   "rules": "copy is verbatim or faithful, with no invented numbers. Each graphic stays inside one uncut stretch of audio. One judge pass, and only egregious cues are redone.",
+   "ask": "the recorded cut, the transcript with times, brand kit.",
+   "uses": "webinar and podcast repurposing, customer-interview films, people stories with real footage.",
+   "uses_short": "webinar and podcast repurposing",
+   "kit": "VO clock (word times), kinetic text, data and diagram pieces, real footage.",
+   "missing": "a picture-in-picture frame for supplied footage; an insert-list runner (many short segments from one cue file).",
+   "dials": [
+    0,
+    0,
+    -2,
+    -1,
+    -1,
+    0,
+    2,
+    -1
+   ]
+  }
+ ],
+ "craft": [
+  [
+   "One cue grid.",
+   "Hang every event on one grid (VO word times for us, music beats as a secondary snap) and start each move about 0.05 s early so it lands on the cue. Keep all cue times in one table, so retiming is one edit."
+  ],
+  [
+   "Closed-form springs, summed per retarget.",
+   "Use the critically damped step response `1 − (1 + ωt)·e^(−ωt)` (or lightly underdamped), adding one response per target change. It stays a pure function of time: a tiny helper beside our two eases."
+  ],
+  [
+   "One carried object.",
+   "One dot, card or number carries identity across scenes and lands on the same pixels on both sides of a handoff. Record those handoff boxes before building scenes; this is our continuity move made exact."
+  ],
+  [
+   "Floods and irises.",
+   "Floods overshoot the corners in about 0.3 s with a soft start, then become a plain rectangle. Irises ease by area. A flood must finish before the next scene starts."
+  ],
+  [
+   "Separate enter and exit timing.",
+   "Text in a morphing container has its own mask, enters after the morph starts and leaves before the next. Outgoing titles clear before incoming ones take the space."
+  ],
+  [
+   "Speed always changes.",
+   "Land slowly, leave fast, overlap a lead move with smaller ones under it. Nothing starts or stops all at once."
+  ],
+  [
+   "Camera discipline.",
+   "One eased move per scene, no zoom-in-then-out, zoom interpolated in log space, camera settling more slowly than its subject. No layer promotion on anything the camera scales, or text blurs."
+  ],
+  [
+   "Motion blur by sub-frame blending.",
+   "Average 3–8 sub-frames per frame (8 for whips). Counters and typed text read frame time, not sub-frame time, so they stay sharp. Fits headless Chrome plus an ffmpeg blend."
+  ],
+  [
+   "The first frame is finished; the last frame holds.",
+   "Frame one is a composed picture. The end holds long enough to read. Loops match geometry and cursor velocity at the wrap."
+  ],
+  [
+   "Measured freeze and pop QA.",
+   "After a render, measure frozen time (about 1 s per 30 s at most, no unplanned still over about 0.5 s) and flag single-frame pops (frame difference about 3× its neighbours). Cheap to add to our regression check."
+  ],
+  [
+   "Stills first, then a fresh critic.",
+   "One still per beat or segment, plus a dense strip around each transition, before the full render. A reviewer who never saw the build returns ranked, timestamped problems, and each round goes in a ledger. This maps onto our board gate and per-segment notes."
+  ],
+  [
+   "Ask for inputs, with defaults.",
+   "The best briefs list their inputs, say what happens if one is skipped, and show a beat map plus 4–8 stills before building. Add an \"inputs\" block to our board."
+  ],
+  [
+   "Facts file and claim guardrails.",
+   "Every on-screen number or claim comes from one facts file. Never fabricate customers or results, and list what must not be claimed."
+  ],
+  [
+   "SFX by measured peak.",
+   "Align each effect's transient peak, not its file start, to the event. Use one soft whoosh per real scene change and clicks only on real actions. Duck the music under VO, finish at −14 LUFS, and keep a music-only stem."
+  ],
+  [
+   "A ban list per style.",
+   "Each family names what it refuses (particles, glows, crossfades, bouncy easing, long holds). A short ban list on each board guards against \"too much in too little time\"."
+  ],
+  [
+   "Cursor grammar.",
+   "Aim at where the target will be, cap the speed (under about 65 px per frame), scale the cursor with the camera, and spring drags from the release point and speed. Typing shows `floor(progress × length)` characters, and the caret blinks only when idle."
+  ],
+  [
+   "Legibility guards.",
+   "At least 4.5:1 contrast, a backing behind any text on busy picture, a minimum size for the phrase being read, and no ornamental motion before the reading hold ends."
+  ],
+  [
+   "Footage as frames.",
+   "Use all-intra or JPEG-sequence clips, draw frame `floor(t·fps)` and await decode, so real footage stays deterministic."
+  ],
+  [
+   "Film finish as a post pass.",
+   "Per-frame grain, halation, a soft vignette and an edge-clamped one-pixel colour fringe, as an optional final shader or ffmpeg step."
+  ]
+ ],
+ "skip": [
+  [
+   "Games and playable prototypes",
+   "interactive state machines, input handling and physics; we output films only."
+  ],
+  [
+   "True 3D worlds, landmarks and take-apart labs",
+   "they need a 3D engine and PBR. Where the idea matters, restyle it as isometric or layered 2D (F16, F17)."
+  ],
+  [
+   "Physics and simulation toys",
+   "accumulated state breaks pure-function frames, and the spectacle rarely carries a B2B message. Use a seeded closed-form fake if needed."
+  ],
+  [
+   "Generative, demoscene and pixel showpieces",
+   "no message, and the retro look is off-brand. Keep only \"animate on twos\" and our shader grounds."
+  ],
+  [
+   "Music and lyric videos",
+   "whole-song timing and performance, while our films follow a supplied VO. The lyric-scale variety (subtitle-small to huge) is already in our type rules."
+  ],
+  [
+   "Character shorts, memes and social edits",
+   "rigged characters, parody of real people, vertical-first. They fail \"real people for people\"."
+  ],
+  [
+   "Web components and scroll pages",
+   "interactive UI, not film. One idea worth taking: a spotlight mask that reveals an inner layer, staged on a timed path."
+  ],
+  [
+   "No usable brief",
+   "showcase posts with no direction."
+  ]
+ ]
+}

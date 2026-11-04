@@ -91,6 +91,9 @@ a film's code ([gallery with the code](styles/GALLERY.md)).
 </tr>
 </table>
 
+
+**Style library.** Nineteen looks a film can take (premium product, real-UI promo, screen walkthrough, kinetic type, logo ident, data story, mechanism explainer, storybook, timeline, scale dive and more). Each has a recipe, a director prompt in our own words, a tuning-scale setting and a live demo built on the kit, without changing the engine. See [style-library/](style-library/README.md).
+
 ## Repository
 
 ```
@@ -110,6 +113,7 @@ films/           one folder per film: FILM.md (brief, facts, credits, review log
 docs/media/      stills, short clips and the pipeline diagram used by these pages
 library/         free photos, music, sound effects, fonts and icons, with a licence ledger
 third_party/     lemo-opuscar's 68 styles, pinned as a reference (MIT)
+style-library/   19 visual styles for B2B films: recipes, our own director prompts, tuning-scale settings, live demos
 tools/           heavy-lock.mjs: one heavy job at a time on a low-memory machine · measure.mjs: reads a render's scale ·
                  regress.mjs: checks the finished films still render identically
 ```

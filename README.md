@@ -22,6 +22,11 @@ The engine runs on one laptop. It uses free assets only and no speech models; th
 <td><img src="docs/media/aether-result.jpg" alt="Aether: the recommended strategy and its result"><br><sub><b>Aether</b> · the decision, with its number counted up</sub></td>
 <td><img src="docs/media/aether-planner.jpg" alt="Aether: a planner approves"><br><sub><b>Aether</b> · the human moment: a planner approves</sub></td>
 </tr>
+<tr>
+<td><img src="docs/media/marketo-opening.jpg" alt="Marketo KT: the real screens fan in around the title"><br><sub><b>Marketo KT</b> · a walkthrough from plain screenshots: the opening</sub></td>
+<td><img src="docs/media/marketo-zoom.jpg" alt="Marketo KT: the camera zooms to the person count"><br><sub><b>Marketo KT</b> · zooms and a highlight on what the voice names</sub></td>
+<td><img src="docs/media/marketo-learning.jpg" alt="Marketo KT: a learning card anchored to the field"><br><sub><b>Marketo KT</b> · learning cards that hold still while you read</sub></td>
+</tr>
 </table>
 
 ## Films
@@ -30,6 +35,7 @@ The engine runs on one laptop. It uses free assets only and no speech models; th
 |---|---|---|
 | [`films/motionlab`](films/motionlab/FILM.md) · [how it was made](films/motionlab/SHOWCASE.md) | 3:06 | MotionLab, the engine's own promo. Its proof is a film within a film: the Aether product story plays inside MotionLab's frame, then pulls back out. |
 | [`films/aether`](films/aether/FILM.md) · [how it was made](films/aether/SHOWCASE.md) | 1:21 | Aether, an AI supply-chain platform: a disruption followed through to its resolution. The first film made on this engine. |
+| [`films/marketo-kt`](films/marketo-kt/FILM.md) | 3:32 | A knowledge-transfer walkthrough of audience segmentation in Marketo Engage, built from 17 plain screenshots and a voiceover. Eight steps with zooms, highlights and a glowing cursor, drawn concepts, eight learning cards and spoken-word captions. |
 
 Renders are not committed (they can be regenerated). Each film's `out/` folder holds its final MP4 once rendered.
 Each showcase page walks through one film in pictures: storyboard, contact sheet, key frames, and the owner's notes
